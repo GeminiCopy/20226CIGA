@@ -124,7 +124,7 @@ public class UIMgr : BaseManager<UIMgr>
             //同步加载
             if (isSyns)
             {
-                GameObject res = ResourcesMgr.Instance.Load<GameObject>("UI/Prefabs/" + panelName);
+                GameObject res = ResourcesMgr.Instance.Load<GameObject>("Prefabs/UI/" + panelName);
                 //层级处理
                 Transform father = GetLayerFather(layer);
                 //避免没有按指定规则传入参数
