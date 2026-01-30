@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections;
+﻿using UnityEngine;
 
-public class StageManager : Singleton<StageManager>
+public class StageManager : MonoBehaviour
 {
-    public override void Init()
+    public int currentStage;
+    private void Awake()
     {
-        base.Init();
-        TypeEventSystem.Inst.Register<CompleteStageEvent>(OnCompleteStage);
+        TypeEventSystem.Inst.Register<CompleteCurrentStageEvent>(OnCompleteStage);
+    }
+
+    public void OnDestroy()
+    {
+        TypeEventSystem.Inst.UnRegister<CompleteCurrentStageEvent>(OnCompleteStage);
     }
     
-    public override void OnDestroy()
+    private void OnCompleteStage(CompleteCurrentStageEvent obj)
     {
-        base.OnDestroy();
-        
-        TypeEventSystem.Inst.UnRegister<CompleteStageEvent>(OnCompleteStage);
-    }
-    
-    private void OnCompleteStage(CompleteStageEvent obj)
-    {
-        string sceneName = obj switch
-        {
-            _ => "1"
-        };
+        currentStage++;
+        string sceneName = $"Stage{currentStage}";
         TypeEventSystem.Inst.Invoke(new LoadSceneEvent()
         {
             sceneName = sceneName,

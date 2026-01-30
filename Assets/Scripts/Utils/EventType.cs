@@ -5,7 +5,6 @@ public struct LoadSceneEvent
     public string sceneName;
     public Action onCompleted;
 }
-public struct CompleteStageEvent
+public struct CompleteCurrentStageEvent
 {
-    public int currentStage;
 }
