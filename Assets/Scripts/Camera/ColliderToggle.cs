@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ColliderToggle : MonoBehaviour
@@ -58,14 +59,18 @@ public class ColliderToggle : MonoBehaviour
 
     private void ShowAll()
     {
-        targetCollider.enabled = true;
+        if (targetCollider != null)
+            targetCollider.enabled = true;
+        if  (selfCollider != null)
         selfCollider.excludeLayers = 0;
     }
 
     private void HideAll()
     {
-        targetCollider.enabled = false;
-        selfCollider.excludeLayers = 1 << 9;
+        if(targetCollider != null)
+            targetCollider.enabled = false;
+        if(selfCollider != null)
+            selfCollider.excludeLayers = 1 << 9;
     }
     
     // 获取当前激活状态
