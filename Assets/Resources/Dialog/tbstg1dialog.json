@@ -1,0 +1,119 @@
+[
+  {
+    "ID": 1,
+    "Target": "Blank",
+    "Content": "som……听得到吗？",
+    "Time": 2,
+    "NextId": 2
+  },
+  {
+    "ID": 2,
+    "Target": "Blank",
+    "Content": "快睁开眼，再这样下去，你会再也醒不来的！",
+    "Time": 2.5
+  },
+  {
+    "ID": 3,
+    "Target": "realia",
+    "Content": "看得到我吗？那有个框，抓住他！",
+    "Time": 3.5,
+    "NextId": 4
+  },
+  {
+    "ID": 4,
+    "Target": "realia",
+    "Content": "它可以擦去虚伪,照亮真实，拖动试试看，它能让你看到我",
+    "Time": 3.5,
+    "NextId": 5
+  },
+  {
+    "ID": 5,
+    "Target": "realia",
+    "Content": "som，是我，realia。",
+    "Time": 1.5,
+    "NextId": 6
+  },
+  {
+    "ID": 6,
+    "Target": "som",
+    "Content": "realia……？",
+    "Time": 1,
+    "NextId": 7
+  },
+  {
+    "ID": 7,
+    "Target": "realia",
+    "Content": "别急着回忆，先听我说——som，你正在做噩梦。",
+    "Time": 2.5,
+    "NextId": 8
+  },
+  {
+    "ID": 8,
+    "Target": "realia",
+    "Content": "这里的一切都是假的。",
+    "Time": 1.5,
+    "NextId": 9
+  },
+  {
+    "ID": 9,
+    "Target": "realia",
+    "Content": "真正的你……在另一个世界。你是黑夜的曙光，是一位勇者！",
+    "Time": 2.5,
+    "NextId": 10
+  },
+  {
+    "ID": 10,
+    "Target": "realia",
+    "Content": "但魔王忌惮你，用卑鄙的诅咒囚禁你的意识，让你陷入这无尽的噩梦。",
+    "Time": 2.5,
+    "NextId": 11
+  },
+  {
+    "ID": 11,
+    "Target": "realia",
+    "Content": "你要尽快逃离，否则将彻底迷失在虚假的梦里。",
+    "Time": 2.5,
+    "NextId": 12
+  },
+  {
+    "ID": 12,
+    "Target": "realia",
+    "Content": "看到这个方框了吗，它是女神大人赐予你的真实之眼。",
+    "Time": 2.5,
+    "NextId": 13
+  },
+  {
+    "ID": 13,
+    "Target": "realia",
+    "Content": "接下来你要去收集附近的光点，它叫真实之泪。",
+    "Time": 2.5,
+    "NextId": 14
+  },
+  {
+    "ID": 14,
+    "Target": "realia",
+    "Content": "每收集一颗，真实之眼就会觉醒一分。它会帮助你看穿幻觉。",
+    "Time": 2.5,
+    "NextId": 15
+  },
+  {
+    "ID": 15,
+    "Target": "realia",
+    "Content": "听着，我没法逗留太久，魔王感知得到我。",
+    "Time": 2.5,
+    "NextId": 16
+  },
+  {
+    "ID": 16,
+    "Target": "realia",
+    "Content": "你要跟随泪光走，它会指引你通往真实的世界。",
+    "Time": 2.5,
+    "NextId": 17
+  },
+  {
+    "ID": 17,
+    "Target": "realia",
+    "Content": "一定要快，魔王随时可能发现你！",
+    "Time": 2
+  }
+]

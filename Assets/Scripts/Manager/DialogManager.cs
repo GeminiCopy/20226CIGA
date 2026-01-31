@@ -27,17 +27,17 @@ public class DialogManager : Singleton<DialogManager>
         var list = textasset.text.FromJson<List<Dialog>>();
         _curDialogs = list.ToDictionary(x => x.Id);
     }
-    public void Play(int startFrom = 1)
+    public void Play(int startFrom = 1,Action onComplete = null)
     {
         if (_isPlaying)
         {
             return;
         }
         
-        PlayLoopAsync(startFrom).Forget();
+        PlayLoopAsync(startFrom,onComplete).Forget();
     }
     
-    private async UniTaskVoid PlayLoopAsync(int startId)
+    private async UniTask PlayLoopAsync(int startId,Action onComplete = null)
     {
         _isPlaying = true;
         int? currentId = startId;
@@ -74,6 +74,7 @@ public class DialogManager : Singleton<DialogManager>
         }
 
         _isPlaying = false;
+        onComplete?.Invoke();
         Debug.Log("Dialog Finished");
     }
 }
