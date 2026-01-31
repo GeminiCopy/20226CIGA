@@ -111,6 +111,15 @@ public class CameraManager : SingletonMono<CameraManager>
         HandleGlobalInput();
         HandleDraggingInput();
     }
+
+    /// <summary>
+    /// 加载新场景后调用
+    /// </summary>
+    public void Clear()
+    {
+        subCameras.Clear();
+        detectedByTriggerCameras.Clear();
+    }
     
     // 拖拽输入处理（新增）
     void HandleDraggingInput()
@@ -283,6 +292,14 @@ public class CameraManager : SingletonMono<CameraManager>
             {
                 detectedByTriggerCameras.Add(correspondingCamera);
                 Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 被TriggerDetector检测到");
+                
+                // 检查是否有摄像机正在被拖动且对应这个TriggerDetector
+                if (currentDraggingCamera == correspondingCamera)
+                {
+                    // 停止当前拖动
+                    EndDrag();
+                    Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 正在被拖动，检测到玩家后停止拖动");
+                }
             }
             else
             {
@@ -445,6 +462,7 @@ public class CameraManager : SingletonMono<CameraManager>
         Grid,           // 网格布局
         Horizontal,     // 水平布局
         Vertical,       // 垂直布局
+        RightVertical,  // 右侧垂直布局
         Free            // 自由布局
     }
     
@@ -462,6 +480,9 @@ public class CameraManager : SingletonMono<CameraManager>
                 break;
             case LayoutType.Vertical:
                 ApplyVerticalLayout();
+                break;
+            case LayoutType.RightVertical:
+                ApplyRightVerticalLayout();
                 break;
             case LayoutType.Free:
                 // 自由布局不自动调整
@@ -516,6 +537,36 @@ public class CameraManager : SingletonMono<CameraManager>
             float y = gridSpacing + i * (cameraHeight + gridSpacing);
             
             subCameras[i].SetViewport(new Vector2(x, y), cameraHeight);
+        }
+    }
+    
+    void ApplyRightVerticalLayout()
+    {
+        if (subCameras.Count == 0) return;
+        
+        // 右侧区域设置：占据屏幕右半部分，留出一定边距
+        float rightMargin = 0.05f; // 右侧边距
+        float topBottomMargin = 0.05f; // 上下边距
+        
+        float rightRegionX = 1f - rightMargin; // 右侧边界
+        float availableWidth = 0.4f; // 可用宽度，占屏幕40%
+        float cameraWidth = availableWidth;
+        
+        float availableHeight = 1f - topBottomMargin * 2f; // 去掉上下边距后的可用高度
+        float totalSpacing = gridSpacing * (subCameras.Count + 1); // 总间距
+        float cameraHeight = (availableHeight - totalSpacing) / subCameras.Count;
+        
+        // 确保摄像机高度不超过可用区域
+        cameraHeight = Mathf.Min(cameraHeight, availableHeight);
+        
+        for (int i = 0; i < subCameras.Count; i++)
+        {
+            // 从上到下排列，所以索引0在顶部
+            float y = topBottomMargin + gridSpacing + i * (cameraHeight + gridSpacing);
+            // x位置设置为右侧区域的最左边
+            float x = rightRegionX - cameraWidth;
+            
+            subCameras[i].SetViewport(new Vector2(x, y), cameraWidth);
         }
     }
     

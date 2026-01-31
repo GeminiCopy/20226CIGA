@@ -13,5 +13,6 @@ public class Const : MonoBehaviour
     public void RefreshScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CameraManager.Instance.Clear();
     }
 }

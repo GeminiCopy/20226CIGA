@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ¹«¹²MonoÄ£¿é¹ÜÀíÆ÷
+/// Monoæ¨¡å—ç®¡ç†å™¨
 /// </summary>
 public class MonoMgr : SingletonAutoMono<MonoMgr>
 {
@@ -14,61 +14,69 @@ public class MonoMgr : SingletonAutoMono<MonoMgr>
     private event UnityAction lateUpdateEvent;
 
     /// <summary>
-    /// Ìí¼ÓUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// æ·»åŠ Updateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
-    public void AddUpateListener(UnityAction updateFun)
+    public void AddUpdateListener(UnityAction updateFun)
     {
         updateEvent += updateFun;
     }
+    
     /// <summary>
-    /// Ìí¼ÓFixedUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// æ·»åŠ FixedUpdateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
-    public void AddFixedUpateListener(UnityAction updateFun)
+    public void AddFixedUpdateListener(UnityAction updateFun)
     {
         fixedUpdateEvent += updateFun;
     }
+    
     /// <summary>
-    /// Ìí¼ÓLateUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// æ·»åŠ LateUpdateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
-    public void AddLateUpateListener(UnityAction updateFun)
+    public void AddLateUpdateListener(UnityAction updateFun)
     {
         lateUpdateEvent += updateFun;
     }
+    
     /// <summary>
-    /// ÒÆ³ıUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// ç§»é™¤Updateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
     public void RemoveUpdateListener(UnityAction updateFun)
     {
         updateEvent -= updateFun;
     }
+    
     /// <summary>
-    /// ÒÆ³ıFixedUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// ç§»é™¤FixedUpdateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
     public void RemoveFixedUpdateListener(UnityAction updateFun)
     {
         fixedUpdateEvent -= updateFun;
     }
+    
     /// <summary>
-    /// ÒÆ³ıLateUpdateÖ¡¸üĞÂ¼àÌıº¯Êı
+    /// ç§»é™¤LateUpdateå¸§äº‹ä»¶ç›‘å¬å™¨
     /// </summary>
     /// <param name="updateFun"></param>
     public void RemoveLateUpdateListener(UnityAction updateFun)
     {
         lateUpdateEvent -= updateFun;
     }
+    
     private void Update()
     {
         updateEvent?.Invoke();
     }
+    
     private void FixedUpdate()
     {
         fixedUpdateEvent?.Invoke();
     }
+    
     private void LateUpdate()
     {
         lateUpdateEvent?.Invoke();

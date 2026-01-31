@@ -135,6 +135,49 @@ public class PlayerController2D : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 设置移动速度
+    /// </summary>
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+    
+    /// <summary>
+    /// 获取当前移动速度
+    /// </summary>
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
+    
+    /// <summary>
+    /// 设置跳跃是否启用
+    /// </summary>
+    public void SetJumpEnabled(bool enabled)
+    {
+        if (!enabled)
+        {
+            currentJumpCount = 0;
+        }
+        else if (isGrounded)
+        {
+            currentJumpCount = maxJumpCount;
+        }
+    }
+    
+    /// <summary>
+    /// 强制设置跳跃次数
+    /// </summary>
+    public void SetJumpCount(int jumpCount)
+    {
+        maxJumpCount = jumpCount;
+        if (isGrounded)
+        {
+            currentJumpCount = jumpCount;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         if (boxCollider != null)
