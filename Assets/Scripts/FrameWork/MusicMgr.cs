@@ -12,7 +12,7 @@ public class MusicMgr : BaseManager<MusicMgr>
     // 背景音乐组件
     internal AudioSource bkMusic = null;
     // 背景音乐音量
-    public float bkMusicValue = 0.1f;
+    public float bkMusicValue = 0.5f;
 
     // 音效组件存储集合
     private List<AudioSource> soundList = new List<AudioSource>();

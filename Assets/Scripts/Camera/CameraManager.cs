@@ -170,6 +170,7 @@ public class CameraManager : SingletonMono<CameraManager>
         
         if (Input.GetKeyDown(KeyCode.L))
         {
+            // 根据当前布局规则重新排列所有子摄像机
             ToggleLayout();
         }
     }
@@ -237,8 +238,34 @@ public class CameraManager : SingletonMono<CameraManager>
         // 初始化相机
         subCamera.Initialize(MainCamera, subCameras.Count - 1);
         
+        // 设置新摄像机初始位置在屏幕上方中心
+        SetNewCameraToTopCenter(subCamera);
+        
         Debug.Log($"CameraManager: Added sub camera {subCameras.Count - 1} {(subCameraPrefab != null ? "(from prefab)" : "(dynamic)")}");
         return subCamera;
+    }
+
+    /// <summary>
+    /// 设置新摄像机位置到屏幕上方中心
+    /// </summary>
+    private void SetNewCameraToTopCenter(SubCameraController camera)
+    {
+        // 屏幕上方中心的坐标
+        float centerX = 0.5f;
+        float topY = 0.8f;
+        
+        // 计算实际位置（考虑摄像机的size）
+        float actualX = centerX - (camera.viewportSize * 0.5f);
+        float actualY = topY;
+        
+        // 确保不会超出屏幕边界
+        actualX = Mathf.Clamp(actualX, 0f, 1f - camera.viewportSize);
+        actualY = Mathf.Clamp(actualY, 0f, 1f - camera.viewportSize);
+        
+        // 设置位置
+        camera.SetViewportPositionOnly(new Vector2(actualX, actualY));
+        
+        Debug.Log($"新摄像机已定位到屏幕上方中心: ({actualX:F2}, {actualY:F2})");
     }
     
     /// <summary>
@@ -508,7 +535,8 @@ public class CameraManager : SingletonMono<CameraManager>
             float x = gridSpacing + col * (cellWidth + gridSpacing);
             float y = gridSpacing + row * (cellHeight + gridSpacing);
             
-            subCameras[i].SetViewport(new Vector2(x, y), Mathf.Min(cellWidth, cellHeight));
+            // 只设置位置，保持原有大小不变
+            subCameras[i].SetViewportPositionOnly(new Vector2(x, y));
         }
     }
     
@@ -522,7 +550,8 @@ public class CameraManager : SingletonMono<CameraManager>
             float x = gridSpacing + i * (cameraWidth + gridSpacing);
             float y = gridSpacing;
             
-            subCameras[i].SetViewport(new Vector2(x, y), cameraWidth);
+            // 只设置位置，保持原有大小不变
+            subCameras[i].SetViewportPositionOnly(new Vector2(x, y));
         }
     }
     
@@ -536,7 +565,8 @@ public class CameraManager : SingletonMono<CameraManager>
             float x = gridSpacing;
             float y = gridSpacing + i * (cameraHeight + gridSpacing);
             
-            subCameras[i].SetViewport(new Vector2(x, y), cameraHeight);
+            // 只设置位置，保持原有大小不变
+            subCameras[i].SetViewportPositionOnly(new Vector2(x, y));
         }
     }
     
@@ -544,30 +574,32 @@ public class CameraManager : SingletonMono<CameraManager>
     {
         if (subCameras.Count == 0) return;
         
-        // 右侧区域设置：占据屏幕右半部分，留出一定边距
-        float rightMargin = 0.05f; // 右侧边距
+        // 右侧边距
+        float rightMargin = 0.05f; // 右侧边距5%
         float topBottomMargin = 0.05f; // 上下边距
         
-        float rightRegionX = 1f - rightMargin; // 右侧边界
-        float availableWidth = 0.4f; // 可用宽度，占屏幕40%
-        float cameraWidth = availableWidth;
-        
+        // 计算可用的垂直空间
         float availableHeight = 1f - topBottomMargin * 2f; // 去掉上下边距后的可用高度
         float totalSpacing = gridSpacing * (subCameras.Count + 1); // 总间距
-        float cameraHeight = (availableHeight - totalSpacing) / subCameras.Count;
-        
-        // 确保摄像机高度不超过可用区域
-        cameraHeight = Mathf.Min(cameraHeight, availableHeight);
+        float averageCameraHeight = (availableHeight - totalSpacing) / subCameras.Count;
         
         for (int i = 0; i < subCameras.Count; i++)
         {
-            // 从上到下排列，所以索引0在顶部
-            float y = topBottomMargin + gridSpacing + i * (cameraHeight + gridSpacing);
-            // x位置设置为右侧区域的最左边
-            float x = rightRegionX - cameraWidth;
+            // 获取当前摄像机的实际大小
+            float cameraSize = subCameras[i].viewportSize;
             
-            subCameras[i].SetViewport(new Vector2(x, y), cameraWidth);
+            // 计算垂直位置（从上到下排列）
+            float y = topBottomMargin + gridSpacing + i * (averageCameraHeight + gridSpacing);
+            
+            // 计算X位置：让摄像机真正靠到屏幕最右边
+            // 使用摄像机的实际size，而不是固定宽度
+            float x = 1f - rightMargin - cameraSize;
+            
+            // 只设置位置，保持原有大小不变
+            subCameras[i].SetViewportPositionOnly(new Vector2(x, y));
         }
+        
+        Debug.Log($"RightVertical布局应用完成：{subCameras.Count}个摄像机已排列到屏幕最右边");
     }
     
     void UpdateLayoutIfNeeded()
@@ -587,13 +619,10 @@ public class CameraManager : SingletonMono<CameraManager>
     
     public void ToggleLayout()
     {
-        LayoutType[] layouts = (LayoutType[])System.Enum.GetValues(typeof(LayoutType));
-        int currentIndex = System.Array.IndexOf(layouts, layoutType);
-        int nextIndex = (currentIndex + 1) % layouts.Length;
+        // 根据当前布局类型重新排列所有子摄像机
+        ArrangeAllSubCameras();
         
-        SetLayoutType(layouts[nextIndex]);
-        
-        Debug.Log($"CameraManager: Switched to {layoutType} layout");
+        Debug.Log($"CameraManager: 根据当前布局类型 {layoutType} 重新排列了 {subCameras.Count} 个子摄像机");
     }
     
     #endregion

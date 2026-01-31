@@ -234,6 +234,15 @@ public class SubCameraController : MonoBehaviour
     {
         return viewportPosition;
     }
+
+    /// <summary>
+    /// 只设置视口位置，保持大小不变
+    /// </summary>
+    public void SetViewportPositionOnly(Vector2 position)
+    {
+        viewportPosition = Vector2.Max(Vector2.zero, Vector2.Min(position, new Vector2(1 - viewportSize, 1 - viewportSize)));
+        UpdateSubCamera();
+    }
     
     /// <summary>
     /// 开始拖拽（由CameraManager调用）
