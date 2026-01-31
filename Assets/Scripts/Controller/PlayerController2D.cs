@@ -74,12 +74,41 @@ public class PlayerController2D : MonoBehaviour
     void CheckGround()
     {
         Vector2 bottomCenter = boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y, 0);
+        Vector2 leftPoint = bottomCenter - new Vector2(boxCollider.bounds.extents.x, 0);
+        Vector2 rightPoint = bottomCenter + new Vector2(boxCollider.bounds.extents.x, 0);
         
         var centerHit = Physics2D.RaycastAll(bottomCenter, Vector2.down, groundCheckDistance);
+        var leftHit = Physics2D.RaycastAll(leftPoint, Vector2.down, groundCheckDistance);
+        var rightHit = Physics2D.RaycastAll(rightPoint, Vector2.down, groundCheckDistance);
+        
         isGrounded = false;
+        
+        // 检查 centerHit
         for (int i = 0; i < centerHit.Length; i++)
         {
             var hit = centerHit[i];
+            if(hit.collider != null && hit.collider.GetComponent<Ground>() != null)
+            {
+                isGrounded = true;
+                return;
+            }
+        }
+        
+        // 检查 leftHit
+        for (int i = 0; i < leftHit.Length; i++)
+        {
+            var hit = leftHit[i];
+            if(hit.collider != null && hit.collider.GetComponent<Ground>() != null)
+            {
+                isGrounded = true;
+                return;
+            }
+        }
+        
+        // 检查 rightHit
+        for (int i = 0; i < rightHit.Length; i++)
+        {
+            var hit = rightHit[i];
             if(hit.collider != null && hit.collider.GetComponent<Ground>() != null)
             {
                 isGrounded = true;

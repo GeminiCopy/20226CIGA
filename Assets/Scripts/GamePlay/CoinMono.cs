@@ -19,6 +19,7 @@ public class CoinMono : MonoBehaviour
     // 触发器检测 - 与Player碰撞时触发
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.name);
         // 检查碰撞对象是否是Player layer
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
