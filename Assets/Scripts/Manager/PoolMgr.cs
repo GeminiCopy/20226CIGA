@@ -38,13 +38,13 @@ public class PoolData
             rootObj.transform.SetParent(poolObj.transform);
         }
         //从gameObject身上挂载的脚本上获取限制的最大值
-        PoolObjMaxNum poolObjMaxNum = firstObj.GetComponent<PoolObjMaxNum>();
-        if(poolObjMaxNum == null)
-        {
-            Debug.LogError("请为对象挂载PoolObjMaxNum脚本，并设置限制最大值！");
-            return;
-        }
-        maxNum = poolObjMaxNum.maxNum;
+        ////PoolObjMaxNum poolObjMaxNum = firstObj.GetComponent<PoolObjMaxNum>();
+        //if(poolObjMaxNum == null)
+        //{
+        //    Debug.LogError("请为对象挂载PoolObjMaxNum脚本，并设置限制最大值！");
+        //    return;
+        //}
+        //maxNum = poolObjMaxNum.maxNum;
         if(maxNum == 0)
         {
             Debug.LogError("请为对象挂载的PoolObjMaxNum脚本上的maxNum设置限制最大值！");

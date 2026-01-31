@@ -26,12 +26,15 @@ public class PlayerController2D : MonoBehaviour
     private int currentJumpCount;
     private bool isGrounded;
     private bool isJumping;
+
+    public Animator animator;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         rb.gravityScale = 2f;
+        animator= GetComponent<Animator>();
     }
     
     void Update()
@@ -93,6 +96,7 @@ public class PlayerController2D : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             currentJumpCount--;
             isJumping = true;
+            animator.SetBool("IsJump", true);
         }
     }
     
@@ -129,6 +133,7 @@ public class PlayerController2D : MonoBehaviour
                 if (contact.normal.y > 0.5f)
                 {
                     isJumping = false;
+                    animator.SetBool("IsJump", true);
                     break;
                 }
             }
@@ -141,6 +146,14 @@ public class PlayerController2D : MonoBehaviour
     public void SetMoveSpeed(float speed)
     {
         moveSpeed = speed;
+        if(moveSpeed!=0f) 
+        {
+            animator.SetBool("IsWalk",true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk",false);
+        }
     }
     
     /// <summary>
