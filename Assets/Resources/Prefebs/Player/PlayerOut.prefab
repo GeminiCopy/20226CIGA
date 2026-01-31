@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5966876232146310403}
   - component: {fileID: 2285829767242129998}
+  - component: {fileID: 7278581014313489544}
   - component: {fileID: 2063263382332730616}
   - component: {fileID: 5955191697299748355}
   - component: {fileID: 3255532022826189823}
-  - component: {fileID: 7278581014313489544}
   m_Layer: 9
   m_Name: PlayerOut
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +88,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7278581014313489544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032580055283754576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ed40d7420a108489b9e37141a96181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  acceleration: 50
+  deceleration: 30
+  jumpForce: 10
+  maxJumpCount: 1
+  groundCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpKey: 32
+  leftKey: 97
+  rightKey: 100
+  animator: {fileID: 0}
 --- !u!95 &2063263382332730616
 Animator:
   serializedVersion: 5
@@ -181,28 +206,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.84, y: 4.39}
   m_EdgeRadius: 0
---- !u!114 &7278581014313489544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8032580055283754576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ed40d7420a108489b9e37141a96181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  acceleration: 50
-  deceleration: 30
-  jumpForce: 10
-  maxJumpCount: 1
-  groundCheckDistance: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  jumpKey: 32
-  leftKey: 97
-  rightKey: 100
-  animator: {fileID: 0}
