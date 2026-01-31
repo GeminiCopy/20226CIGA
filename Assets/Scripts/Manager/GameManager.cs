@@ -7,8 +7,7 @@ public class GameManager: SingletonMono<GameManager>
     
     string EndResourcePath = "Prefebs/UI/GameOverPanel";//结束面板的路径
     //角色路径
-    string PlayerOutPath = "Prefebs/Player/PlayerOut.prefab";
-    string DeathMusicPath = "Music/player_dead.mp3";
+    string DeathMusicPath = "Music/player_dead";
     public AudioClip deathSound;
     GameObject GameOverPanelPrefab;//结束面板prefeb
     GameObject GameOverPanelPrefabInstance;//实例化的面板
@@ -41,7 +40,8 @@ public class GameManager: SingletonMono<GameManager>
         GameObject GameOverPanelPrefab = ResourcesMgr.Instance.Load<GameObject>(EndResourcePath);//加载面板
         PlayerOut = transform.Find("PlayerOut").gameObject;
         SetRespawnPoint();
-        GameOverPanelPrefabInstance = Instantiate(GameOverPanelPrefab);
+        GameOverPanelPrefabInstance = Instantiate(GameOverPanelPrefab,this.transform);
+        
     }
     //角色死亡时调用
     public void OnDie()
@@ -49,7 +49,7 @@ public class GameManager: SingletonMono<GameManager>
         //UIMgr.Instance.ShowPanel<GameOverPanel>(SystemFather);好像有问题
         isDead = true;
         MusicMgr.Instance.PlaySound(DeathMusicPath,false,true);
-        GameOverPanelPrefabInstance.SetActive(true);
+        GameOverPanelPrefabInstance.gameObject.SetActive(true);
         Debug.Log(" 角色死亡");
     }
 
@@ -67,7 +67,7 @@ public class GameManager: SingletonMono<GameManager>
             Debug.Log("重生错误");
         }
         PlayerOut.transform.position = RespawnPoint.transform.position;//重置位置
-        GameOverPanelPrefabInstance.SetActive(false);
+        GameOverPanelPrefabInstance.gameObject.SetActive(false);
         //重置状态
         Debug.Log("角色重生");
     }
