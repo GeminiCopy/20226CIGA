@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerController2D : MonoBehaviour
 {
     [Header("移动设置")]
@@ -13,7 +13,6 @@ public class PlayerController2D : MonoBehaviour
     public float jumpForce = 10f;
     public int maxJumpCount = 1;
     public float groundCheckDistance = 0.1f;
-    public LayerMask groundLayer;
     
     [Header("输入设置")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -21,17 +20,17 @@ public class PlayerController2D : MonoBehaviour
     public KeyCode rightKey = KeyCode.D;
     
     private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
+    private CapsuleCollider2D boxCollider;
     private float moveInput;
     private int currentJumpCount;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isJumping;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        rb.gravityScale = 2f;
+        boxCollider = GetComponent<CapsuleCollider2D>();
+        rb.gravityScale = 0.8f;
     }
     
     void Update()
@@ -68,14 +67,18 @@ public class PlayerController2D : MonoBehaviour
     void CheckGround()
     {
         Vector2 bottomCenter = boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y, 0);
-        Vector2 leftPoint = bottomCenter - new Vector2(boxCollider.bounds.extents.x, 0);
-        Vector2 rightPoint = bottomCenter + new Vector2(boxCollider.bounds.extents.x, 0);
         
-        RaycastHit2D centerHit = Physics2D.Raycast(bottomCenter, Vector2.down, groundCheckDistance, groundLayer);
-        RaycastHit2D leftHit = Physics2D.Raycast(leftPoint, Vector2.down, groundCheckDistance, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(rightPoint, Vector2.down, groundCheckDistance, groundLayer);
-        
-        isGrounded = centerHit.collider != null || leftHit.collider != null || rightHit.collider != null;
+        var centerHit = Physics2D.RaycastAll(bottomCenter, Vector2.down, groundCheckDistance);
+        isGrounded = false;
+        for (int i = 0; i < centerHit.Length; i++)
+        {
+            var hit = centerHit[i];
+            if(hit.collider != null && hit.collider.GetComponent<Ground>() != null)
+            {
+                isGrounded = true;
+                return;
+            }
+        }
     }
     
     void UpdateJumpCount()
@@ -122,7 +125,7 @@ public class PlayerController2D : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        if (collision.gameObject.GetComponent<Ground>() != null)
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
@@ -184,7 +187,13 @@ public class PlayerController2D : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Vector2 bottomCenter = boxCollider.bounds.center - new Vector3(0, boxCollider.bounds.extents.y, 0);
+            Vector2 leftPoint = bottomCenter - new Vector2(boxCollider.bounds.extents.x, 0);
+            Vector2 rightPoint = bottomCenter + new Vector2(boxCollider.bounds.extents.x, 0);
+            
+            // 绘制地面检测射线
             Gizmos.DrawLine(bottomCenter, bottomCenter + Vector2.down * groundCheckDistance);
+            Gizmos.DrawLine(leftPoint, leftPoint + Vector2.down * groundCheckDistance);
+            Gizmos.DrawLine(rightPoint, rightPoint + Vector2.down * groundCheckDistance);
         }
     }
 }

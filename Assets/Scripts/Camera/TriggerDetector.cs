@@ -13,6 +13,7 @@ public class TriggerDetector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("ENTER:" + other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Debug.Log("玩家进入");

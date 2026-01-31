@@ -3,76 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// »º´æ³ØÖÐµÄÊý¾Ý¶ÔÏó
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
 /// </summary>
 public class PoolData
 {
-    //ÓÃÀ´´æ´¢Êý¾Ý¶ÔÏó
+    //ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
     private Stack<GameObject> dataStack = new Stack<GameObject>();
-    //ÓÃÀ´´æ´¢ÕýÔÚÊ¹ÓÃµÄÊý¾Ý¶ÔÏó
+    //ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
     private Queue<GameObject> usedDataQueue = new Queue<GameObject>();
 
-    //¶ÔÏó³ØÕýÔÚÊ¹ÓÃµÄÊý¾Ý¶ÔÏóÊýÁ¿µÄ×î´óÖµ ´Ó¹ÒÔØµÄÎïÌåÉíÉÏÉèÖÃ²¢»ñÈ¡
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ ï¿½Ó¹ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½È¡
     public int maxNum;
-    //³éÌë¸ù¶ÔÏó ÓÃÀ´½øÐÐ²¼¾Ö¹ÜÀí
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½
     private GameObject rootObj;
-    //»ñÈ¡ÈÝÆ÷ÖÐÊÇ·ñÓÐ¶ÔÏó
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
     public int Count => dataStack.Count;
-    //»ñÈ¡ÕýÔÚÊ¹ÓÃµÄÊý¾Ý¶ÔÏóÊýÁ¿
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int usedCount => usedDataQueue.Count;
 
     /// <summary>
-    /// ¹¹Ôìº¯Êý
+    /// ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
     /// </summary>
-    /// <param name="poolObj">ÓÃÓÚ×÷Îª¸ùµÄ¶ÔÏó</param>
-    /// <param name="rootName">¸ù¶ÔÏóµÄÃû×Ö</param>
-    /// <param name="firstObj">µÚÒ»¸ö»ñÈ¡µÄ¶ÔÏó</param>
+    /// <param name="poolObj">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½</param>
+    /// <param name="rootName">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="firstObj">ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä¶ï¿½ï¿½ï¿½</param>
     public PoolData(GameObject poolObj,string rootName,GameObject firstObj)
     {
-        //¿ªÆô²¼¾Ö¹¦ÄÜÊ± ²Å»á¶¯Ì¬´´½¨¸¸×Ó¹ØÏµ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½Ê± ï¿½Å»á¶¯Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½Ïµ
         if(PoolMgr.isOpenLayout)
         {
-            //´´½¨³éÌë¸¸¶ÔÏó
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¸¸ï¿½ï¿½ï¿½ï¿½
             rootObj = new GameObject(rootName + "_Pool");
-            //ºÍ¹ñ×Ó¶ÔÏó½¨Á¢¸¸×Ó¹ØÏµ
+            //ï¿½Í¹ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½Ïµ
             rootObj.transform.SetParent(poolObj.transform);
         }
-        //´ÓgameObjectÉíÉÏ¹ÒÔØµÄ½Å±¾ÉÏ»ñÈ¡ÏÞÖÆµÄ×î´óÖµ
-        PoolObjMaxNum poolObjMaxNum = firstObj.GetComponent<PoolObjMaxNum>();
-        if(poolObjMaxNum == null)
-        {
-            Debug.LogError("ÇëÎª¶ÔÏó¹ÒÔØPoolObjMaxNum½Å±¾£¬²¢ÉèÖÃÏÞÖÆ×î´óÖµ£¡");
-            return;
-        }
-        maxNum = poolObjMaxNum.maxNum;
-        if(maxNum == 0)
-        {
-            Debug.LogError("ÇëÎª¶ÔÏó¹ÒÔØµÄPoolObjMaxNum½Å±¾ÉÏµÄmaxNumÉèÖÃÏÞÖÆ×î´óÖµ£¡");
-            return;
-        }
+        //ï¿½ï¿½gameObjectï¿½ï¿½ï¿½Ï¹ï¿½ï¿½ØµÄ½Å±ï¿½ï¿½Ï»ï¿½È¡ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Öµ
+        //PoolObjMaxNum poolObjMaxNum = firstObj.GetComponent<PoolObjMaxNum>();
+        //if(poolObjMaxNum == null)
+        //{
+        //    Debug.LogError("ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PoolObjMaxNumï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½");
+        //    return;
+        //}
+        //maxNum = poolObjMaxNum.maxNum;
+        //if(maxNum == 0)
+        //{
+        //    Debug.LogError("ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½PoolObjMaxNumï¿½Å±ï¿½ï¿½Ïµï¿½maxNumï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½");
+        //    return;
+        //}
         if(maxNum == 1)
         {
-            Debug.LogError("Çë²»Òª½«ÏÞÖÆ×î´óÖµÉèÎª1£¡");
+            Debug.LogError("ï¿½ë²»Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îª1ï¿½ï¿½");
             return;
         }
     }
 
     /// <summary>
-    /// ´Ó»º´æ³ØÖÐÈ¡³ö¶ÔÏó
+    /// ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <returns>ÏëÒªµÄ¶ÔÏóÊý¾Ý</returns>
+    /// <returns>ï¿½ï¿½Òªï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</returns>
     public GameObject Pop()
     {
-        //È¡³ö¶ÔÏó
+        //È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         GameObject obj = dataStack.Pop();
-        //¼¤»î¶ÔÏó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         obj.SetActive(true);
-        //½«¶ÔÏó´æÈëÕýÔÚÊ¹ÓÃµÄ¶ÓÁÐ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ÃµÄ¶ï¿½ï¿½ï¿½
         usedDataQueue.Enqueue(obj);
 
         if (PoolMgr.isOpenLayout)
         {
-            //¶Ï¿ª¸¸×Ó¹ØÏµ
+            //ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½Ïµ
             obj.transform.SetParent(null);
         }
 
@@ -80,22 +80,22 @@ public class PoolData
     }
 
     /// <summary>
-    /// ½«ÎïÌå´æ·Åµ½»º´æ³ØÖÐ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="obj">Òª´æ·ÅµÄÎïÌå</param>
+    /// <param name="obj">Òªï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½</param>
     public void Push(GameObject obj)
     {
-        //ÈÃ¶ÔÏóÊ§»î
+        //ï¿½Ã¶ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
         obj.SetActive(false);
-        //ÈÃ¶ÔÏóÀë¿ªÕýÔÚÊ¹ÓÃµÄ¶ÓÁÐ
+        //ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ÃµÄ¶ï¿½ï¿½ï¿½
         usedDataQueue.Dequeue();
 
         if (PoolMgr.isOpenLayout)
         {
-            //·ÅÈë¶ÔÓ¦³éÌëµÄ¸ùÎïÌå ½¨Á¢¸¸×Ó¹ØÏµ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½Ïµ
             obj.transform.SetParent(rootObj.transform);
         }
-        //ÈÃÕ»¼ÇÂ¼¶ÔÓ¦µÄ¶ÔÏóÊý¾Ý
+        //ï¿½ï¿½Õ»ï¿½ï¿½Â¼ï¿½ï¿½Ó¦ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         dataStack.Push(obj);
     }
 
@@ -112,68 +112,68 @@ public class PoolData
 }
 
 /// <summary>
-/// »º´æ³Ø£¨¶ÔÏó³Ø£©Ä£¿é ¹ÜÀíÆ÷
+/// ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½Ä£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class PoolMgr : BaseManager<PoolMgr>
 {
-    //¹ñ×ÓÈÝÆ÷
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Dictionary<string, PoolData> poolDic = new Dictionary<string, PoolData>();
-    //³éÌë¸ù¶ÔÏó ÓÃÀ´½øÐÐ²¼¾Ö¹ÜÀí
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½
     private GameObject poolObj;
-    //ÊÇ·ñ¿ªÆô²¼¾Ö¹¦ÄÜ
+    //ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½
     public static bool isOpenLayout = true;
 
     private PoolMgr() { }
 
     /// <summary>
-    /// ´Ó»º´æ³ØÖÐÈ¡¶«Î÷µÄ·½·¨
+    /// ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="name">³éÌëÈÝÆ÷µÄÃû×Ö</param>
-    /// <param name="maxNum">¶ÔÏóÉÏÏÞÊýÁ¿ Ä¬ÈÏÎª10</param>
-    /// <returns>È¡³öµÄ¶ÔÏó</returns>
+    /// <param name="name">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="maxNum">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¬ï¿½ï¿½Îª10</param>
+    /// <returns>È¡ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½</returns>
     public GameObject GetObj(string name)
     {
         GameObject obj;
 
-        //´æÎïÌåÇ°ÅÐ¶ÏÊÇ·ñÓÐ¸ùÎïÌå
-        //ÈôÎª¿Õ Ôò´´½¨
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½Îªï¿½ï¿½ ï¿½ò´´½ï¿½
         if (PoolMgr.isOpenLayout && poolObj == null )
         {
             poolObj = new GameObject("Pool");
         }
-        //²»´æÔÚ¶ÔÓ¦µÄ³éÌëÈÝÆ÷ ´´½¨³éÌë
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½Ó¦ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!poolDic.ContainsKey(name))
         {
-            //Í¨¹ý×ÊÔ´¼ÓÔØÈ¥ÊµÀý»¯Ò»¸ögameobject
+            //Í¨ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½È¥Êµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½gameobject
             obj = GameObject.Instantiate(Resources.Load<GameObject>(name));
             obj.name = name;
-            //´´½¨Ò»¸öÐÂµÄ³éÌë
+            //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ÂµÄ³ï¿½ï¿½ï¿½
             poolDic.Add(name, new PoolData(poolObj, name ,obj));
-            //½«obj·ÅÈëÕýÔÚÊ¹ÓÃÖÐµÄÊý¾Ý¶ÔÏó¶ÓÁÐ
+            //ï¿½ï¿½objï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             poolDic[name].usedQueuePush(obj);
         }
-        //´æÔÚ¶ÔÓ¦µÄ³éÌëÈÝÆ÷
+        //ï¿½ï¿½ï¿½Ú¶ï¿½Ó¦ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else
         {
-            //ÈôÊ¹ÓÃÖÐµÄ¶ÔÏóÊýÁ¿³¬¹ýÉÏÏÞ
+            //ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ÐµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (poolDic[name].usedCount >= poolDic[name].maxNum)
             {
-                //´ÓusedDataQueueÖÐÈ¡³ö¶ÔÏóÔÙ´Î¼ÓÈëusedDataQueueÖÐ
+                //ï¿½ï¿½usedDataQueueï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù´Î¼ï¿½ï¿½ï¿½usedDataQueueï¿½ï¿½
                 obj = poolDic[name].usedQueuePop();
                 poolDic[name].usedQueuePush(obj);
             }
-            //ÈôÊ¹ÓÃÖÐµÄ¶ÔÏóÊýÁ¿Ã»³¬¹ýÉÏÏÞ
+            //ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ÐµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             else
             {
-                //³éÌëÖÐÓÐ¶ÔÏó
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½
                 if (poolDic[name].Count > 0)
                 {
                     obj = poolDic[name].Pop();
                 }
-                //Èç¹ûÃ»ÓÐ¶ÔÏó È¥´´Ôì
+                //ï¿½ï¿½ï¿½Ã»ï¿½Ð¶ï¿½ï¿½ï¿½ È¥ï¿½ï¿½ï¿½ï¿½
                 else
                 {
-                    //Í¨¹ý×ÊÔ´¼ÓÔØÈ¥ÊµÀý»¯Ò»¸ögameobject
+                    //Í¨ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½È¥Êµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½gameobject
                     obj = GameObject.Instantiate(Resources.Load<GameObject>(name));
                     obj.name = name;
                     poolDic[name].usedQueuePush(obj);   
@@ -184,23 +184,23 @@ public class PoolMgr : BaseManager<PoolMgr>
     }
 
     /// <summary>
-    /// Íù»º´æ³ØÖÐ·Å¶«Î÷µÄ·½·¨
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·Å¶ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="name">·ÅÈë³éÌëµÄÃû×Ö</param>
-    /// <param name="obj">·ÅÈëµÄ¶ÔÏó</param>
+    /// <param name="name">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+    /// <param name="obj">ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½</param>
     public void PushObj(GameObject obj)
     {
-        //Íù³éÌëÖÐ´æÈë¶ÔÏó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         poolDic[obj.name].Push(obj);
     }
     /// <summary>
-    /// ÓÃÓÚÇå³þÕû¸ö¹ñ×ÓµÄÊý¾Ý
-    /// Ê¹ÓÃ³¡¾°Ö÷ÒªÊÇÇÐ³¡¾°Ê±
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+    /// Ê¹ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½Ê±
     /// </summary>
     public void ClearPool()
     {
         poolDic.Clear();
-        //ÇÐ»»³¡¾°Ê± ¸ùÎïÌåÒ²Òª±»ÒÆ³ý
+        //ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ê± ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²Òªï¿½ï¿½ï¿½Æ³ï¿½
         poolObj = null;
     }
 }
