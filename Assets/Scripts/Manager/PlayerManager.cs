@@ -20,6 +20,7 @@ public class PlayerManager : SingletonMono<PlayerManager>
     public bool isStart;//但这个开启时，没有框也不会禁用玩家//用于开始游戏
     private HashSet<TriggerDetector> detectedTriggers = new HashSet<TriggerDetector>();
     private int previousDetectorCount = -1;
+    private bool previousColliderLayerState = false; // 跟踪excludeLayers状态
     
     protected override void Awake()
     {
@@ -137,6 +138,7 @@ public class PlayerManager : SingletonMono<PlayerManager>
     /// </summary>
     private void UpdatePlayerControls()
     {
+        Debug.Log("233:update");
         int currentCount = detectedTriggers.Count;
         
         // 只有当状态真正发生变化时才更新
@@ -197,6 +199,76 @@ public class PlayerManager : SingletonMono<PlayerManager>
     public HashSet<TriggerDetector> GetDetectedTriggers()
     {
         return new HashSet<TriggerDetector>(detectedTriggers);
+    }
+    
+    /// <summary>
+    /// 响应CameraManager的TriggerDetector状态变化
+    /// </summary>
+    public void OnCameraTriggerDetectorStateChanged(bool hasDetectedCameras)
+    {
+        Debug.Log($"PlayerManager: 收到CameraManager通知 - hasDetectedCameras: {hasDetectedCameras}");
+        
+        // 直接更新player1同级collider的exclude layer
+        UpdatePlayer1ColliderExcludeLayers(hasDetectedCameras);
+    }
+    
+    /// <summary>
+    /// 检查子摄像机是否有TriggerDetector被检测（保留作为备用方法）
+    /// </summary>
+    private void CheckSubCamerasTriggerDetectorStatus()
+    {
+        Debug.Log("233:check");
+        bool hasDetectedCameras = false;
+        
+        if (CameraManager.Instance != null)
+        {
+            var detectedCameras = CameraManager.Instance.GetDetectedCameras();
+            hasDetectedCameras = detectedCameras.Count > 0;
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"PlayerManager: 检测到 {detectedCameras.Count} 个子摄像机被TriggerDetector检测");
+            }
+        }
+        
+        Debug.Log("233:hasDetectedCameras");
+        // 更新player1同级collider的exclude layer
+        UpdatePlayer1ColliderExcludeLayers(hasDetectedCameras);
+    }
+    
+    /// <summary>
+    /// 设置player1同级collider的exclude layer
+    /// </summary>
+    private void UpdatePlayer1ColliderExcludeLayers(bool shouldExclude)
+    {
+        if (player1 == null) return;
+        
+        // 检查状态是否真的改变了
+        if (previousColliderLayerState == shouldExclude)
+        {
+            return; // 状态没有改变，不需要更新
+        }
+        
+        int excludeLayerMask = shouldExclude ? (1 << 12) : 0;
+        
+        // 获取player1及其子对象的所有collider
+        Collider2D[] colliders = player1.GetComponentsInChildren<Collider2D>();
+        
+        foreach (var collider in colliders)
+        {
+            if (collider != null)
+            {
+                collider.excludeLayers = excludeLayerMask;
+            }
+        }
+        
+        if (showDebugInfo)
+        {
+            string action = shouldExclude ? "排除layer 12" : "正常碰撞检测";
+            Debug.Log($"PlayerManager: 已{action}，affected colliders: {colliders.Length}");
+        }
+        
+        previousColliderLayerState = shouldExclude;
     }
     
     /// <summary>

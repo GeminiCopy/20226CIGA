@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(BoxCollider))]
-//¹ÒÔØµ½É±ËÀÍæ¼ÒµÄÅö×²ÌåÉÏ
+using UnityEngine.SceneManagement;
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class KillPlayer : MonoBehaviour
 {
     public DeathWay deathWay = DeathWay.None;
     public enum DeathWay
     {
         None,
-        Bury
+        Bury,
+        Falling
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag=="Player")
-        OnKillPlayer();
+        if(collision.gameObject.layer == 9)
+        {
+            OnKillPlayer();
+            Debug.Log("dead");
+        }
     }
     public void OnKillPlayer()
     {
@@ -24,9 +28,13 @@ public class KillPlayer : MonoBehaviour
             case DeathWay.None:
                 break;
             case DeathWay.Bury:
-                //²¥·ÅËÀÍö¶¯»­
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                break;
+            case DeathWay.Falling:
                 break;
         }
-        GameManager.Instance.OnDie();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CameraManager.Instance.Clear();
+        //GameManager.Instance.OnDie();
     }
 }

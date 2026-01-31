@@ -55,6 +55,9 @@ public class CameraManager : SingletonMono<CameraManager>
     // 拖拽偏移量
     private Vector2 dragOffset;
     
+    // 跟踪检测状态，避免重复通知PlayerManager
+    private bool previousHasDetectedCameras = false;
+    
     // 公共属性：是否只允许一个摄像机拖拽
     public bool AllowOnlyOneDragging
     {
@@ -315,6 +318,8 @@ public class CameraManager : SingletonMono<CameraManager>
         
         if (correspondingCamera != null)
         {
+            bool stateChanged = false;
+            
             if (detected)
             {
                 detectedByTriggerCameras.Add(correspondingCamera);
@@ -332,6 +337,20 @@ public class CameraManager : SingletonMono<CameraManager>
             {
                 detectedByTriggerCameras.Remove(correspondingCamera);
                 Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 解除TriggerDetector检测");
+            }
+            
+            // 检查检测状态是否真正改变
+            bool hasDetectedCameras = detectedByTriggerCameras.Count > 0;
+            if (hasDetectedCameras != previousHasDetectedCameras)
+            {
+                stateChanged = true;
+                previousHasDetectedCameras = hasDetectedCameras;
+            }
+            
+            // 如果状态改变了，通知PlayerManager
+            if (stateChanged)
+            {
+                NotifyPlayerManagerAboutTriggerChange(hasDetectedCameras);
             }
         }
     }
@@ -699,6 +718,22 @@ public class CameraManager : SingletonMono<CameraManager>
     public HashSet<SubCameraController> GetDetectedCameras()
     {
         return new HashSet<SubCameraController>(detectedByTriggerCameras);
+    }
+    
+    /// <summary>
+    /// 通知PlayerManager关于TriggerDetector状态变化
+    /// </summary>
+    private void NotifyPlayerManagerAboutTriggerChange(bool hasDetectedCameras)
+    {
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.OnCameraTriggerDetectorStateChanged(hasDetectedCameras);
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"CameraManager: 通知PlayerManager - hasDetectedCameras: {hasDetectedCameras}");
+            }
+        }
     }
     
     /// <summary>

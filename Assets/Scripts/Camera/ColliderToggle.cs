@@ -62,7 +62,7 @@ public class ColliderToggle : MonoBehaviour
         if (targetCollider != null)
             targetCollider.enabled = true;
         if  (selfCollider != null)
-        selfCollider.excludeLayers = 0;
+            selfCollider.excludeLayers = 0;
     }
 
     private void HideAll()
