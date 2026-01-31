@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 //挂载到杀死玩家的碰撞体上
 public class KillPlayer : MonoBehaviour
 {
@@ -10,7 +10,8 @@ public class KillPlayer : MonoBehaviour
     public enum DeathWay
     {
         None,
-        Bury
+        Bury,
+        Falling
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,6 +26,8 @@ public class KillPlayer : MonoBehaviour
                 break;
             case DeathWay.Bury:
                 //播放死亡动画
+                break;
+            case DeathWay.Falling:
                 break;
         }
         GameManager.Instance.OnDie();
