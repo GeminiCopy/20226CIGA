@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-//���ص�ɱ����ҵ���ײ����
 public class KillPlayer : MonoBehaviour
 {
     public DeathWay deathWay = DeathWay.None;
     public enum DeathWay
     {
         None,
-        Bury
+        Bury,
+        Falling
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,6 +29,8 @@ public class KillPlayer : MonoBehaviour
                 break;
             case DeathWay.Bury:
                 //������������
+                break;
+            case DeathWay.Falling:
                 break;
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

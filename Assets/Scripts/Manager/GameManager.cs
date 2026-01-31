@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //游戏管理器
-public class GameManager:SingletonAutoMono<GameManager>
+public class GameManager: SingletonMono<GameManager>
 {
     
     string EndResourcePath = "Prefebs/UI/GameOverPanel";//结束面板的路径
     //角色路径
-    string PlayerOutPath = "Prefebs/Player/PlayerOut.prefab";
+    string DeathMusicPath = "Music/player_dead";
+    public AudioClip deathSound;
     GameObject GameOverPanelPrefab;//结束面板prefeb
     GameObject GameOverPanelPrefabInstance;//实例化的面板
     GameObject PlayerOut;
@@ -15,17 +16,18 @@ public class GameManager:SingletonAutoMono<GameManager>
 
     public float RestartCounter, RestartCount;
     private bool isDead;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Init();
-        PlayerOut = transform.Find("PlayerOut").gameObject;
+        
     }
     private void Update()
     {
         if (isDead)//自动重生
         {
-            RestartCount -= Time.deltaTime;
-            if (RestartCount <= 0)
+            RestartCounter -= Time.deltaTime;
+            if (RestartCounter <= 0)
             {
                 ReStart();
             }
@@ -36,17 +38,24 @@ public class GameManager:SingletonAutoMono<GameManager>
         RestartCount = 2f;//重新开始时间
         RestartCounter = RestartCount;
         GameObject GameOverPanelPrefab = ResourcesMgr.Instance.Load<GameObject>(EndResourcePath);//加载面板
+        PlayerOut = transform.Find("PlayerOut").gameObject;
+        SetRespawnPoint();
+        GameOverPanelPrefabInstance = Instantiate(GameOverPanelPrefab,this.transform);
+        
     }
     //角色死亡时调用
     public void OnDie()
     {
-        UIMgr.Instance.ShowPanel<GameOverPanel>(E_UILayer.system);
+        //UIMgr.Instance.ShowPanel<GameOverPanel>(SystemFather);好像有问题
         isDead = true;
+        MusicMgr.Instance.PlaySound(DeathMusicPath,false,true);
+        GameOverPanelPrefabInstance.gameObject.SetActive(true);
+        Debug.Log(" 角色死亡");
     }
 
-    public void SetStartPoint(GameObject obj)
+    public void SetRespawnPoint()
     {
-        RespawnPoint = obj;
+        RespawnPoint = transform.Find("StartPoint").gameObject;
     }
     public void ReStart()
     {
@@ -58,6 +67,9 @@ public class GameManager:SingletonAutoMono<GameManager>
             Debug.Log("重生错误");
         }
         PlayerOut.transform.position = RespawnPoint.transform.position;//重置位置
+        GameOverPanelPrefabInstance.gameObject.SetActive(false);
         //重置状态
+        Debug.Log("角色重生");
     }
+
 }
