@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// 层级枚举
@@ -61,6 +62,14 @@ public class UIMgr : BaseManager<UIMgr>
         uiCanvas = GameObject.Instantiate(ResourcesMgr.Instance.Load<Canvas>("UI/Prefabs/Canvas")).GetComponent <Canvas>();
         //设置使用的UI摄像机
         uiCanvas.worldCamera = uiCamera;
+        
+        // 新增：因为使用urp，把ui相机调成overlay，并把它加入到主相机的stack上
+        var mainCamData = Camera.main.GetUniversalAdditionalCameraData();
+        if (mainCamData != null)
+        {
+            mainCamData.cameraStack.Add(uiCamera);
+        }
+        
         //同样过场景不移除
         GameObject.DontDestroyOnLoad (uiCanvas.gameObject);
 
@@ -116,7 +125,6 @@ public class UIMgr : BaseManager<UIMgr>
             panelDic[panelName].ShowMe();
             //存在回调函数 返回即可
             callback?.Invoke(panelDic[panelName] as T);
-            return;
         }
         //不存在面板
         else
@@ -146,7 +154,7 @@ public class UIMgr : BaseManager<UIMgr>
             //异步加载
             else
             {
-                ResourcesMgr.Instance.LoadAsync<GameObject>("UI/Prefabs/"+ panelName, (res) =>
+                ResourcesMgr.Instance.LoadAsync<GameObject>("UI/Prefabs/"+ panelName, res =>
                 {
                     //层级处理
                     Transform father = GetLayerFather(layer);
