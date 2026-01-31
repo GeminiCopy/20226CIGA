@@ -18,7 +18,7 @@ public class GameManager:SingletonAutoMono<GameManager>
     private void Awake()
     {
         Init();
-       
+        PlayerOut = transform.Find("PlayerOut").gameObject;
     }
     private void Update()
     {
@@ -36,9 +36,6 @@ public class GameManager:SingletonAutoMono<GameManager>
         RestartCount = 2f;//重新开始时间
         RestartCounter = RestartCount;
         GameObject GameOverPanelPrefab = ResourcesMgr.Instance.Load<GameObject>(EndResourcePath);//加载面板
-        PlayerOut = transform.Find("PlayerOut").gameObject;
-        SetRespawnPoint();
-        
     }
     //角色死亡时调用
     public void OnDie()
@@ -46,10 +43,10 @@ public class GameManager:SingletonAutoMono<GameManager>
         UIMgr.Instance.ShowPanel<GameOverPanel>(E_UILayer.system);
         isDead = true;
     }
-    //重生点挂在Gamemanager下
-    public void SetRespawnPoint()
+
+    public void SetStartPoint(GameObject obj)
     {
-        RespawnPoint = transform.Find("RespawnPoint").gameObject;//获取重生点
+        RespawnPoint = obj;
     }
     public void ReStart()
     {
