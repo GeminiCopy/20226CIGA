@@ -43,6 +43,11 @@ public class GameManager:SingletonAutoMono<GameManager>
         UIMgr.Instance.ShowPanel<GameOverPanel>(E_UILayer.system);
         isDead = true;
     }
+
+    public void SetStartPoint(GameObject obj)
+    {
+        RespawnPoint = obj;
+    }
     public void ReStart()
     {
         isDead = false;
@@ -52,6 +57,7 @@ public class GameManager:SingletonAutoMono<GameManager>
         {
             Debug.Log("重生错误");
         }
-
+        PlayerOut.transform.position = RespawnPoint.transform.position;//重置位置
+        //重置状态
     }
 }
