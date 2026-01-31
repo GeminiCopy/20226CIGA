@@ -2,25 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //游戏管理器
-public class GameManager:MonoBehaviour
+public class GameManager:SingletonAutoMono<GameManager>
 {
-    private static GameManager instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject("GameManager");//没有就创建
-                    instance = obj.AddComponent<GameManager>();
-                }
-            }
-            return instance; 
-        }
-    }
+    
     string resourcePath = "Prefeb/UI/GameOverPanel";//结束面板的路径
     GameObject GameOverPanelPrefab;//结束面板prefeb
     GameObject GameOverPanelPrefabInstance;//实例化的面板
@@ -30,7 +14,6 @@ public class GameManager:MonoBehaviour
     private bool isDead;
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         Init();
     }
     private void Update()
@@ -48,17 +31,12 @@ public class GameManager:MonoBehaviour
     {
         RestartCount = 2f;//重新开始时间
         RestartCounter = RestartCount;
-        GameObject GameOverPanelPrefab = Resources.Load<GameObject>(resourcePath);//加载面板
+        GameObject GameOverPanelPrefab = ResourcesMgr.Instance.Load<GameObject>(resourcePath);//加载面板
     }
     //角色死亡时调用
     public void OnDie()
     {
-        if(GameOverPanelPrefabInstance==null)
-        {
-            GameOverPanelPrefabInstance=Instantiate(GameOverPanelPrefab);//生成结束面板
-        }
-
-        GameOverPanelPrefabInstance.SetActive(true);
+        UIMgr.Instance.ShowPanel<GameOverPanel>(E_UILayer.system);
         isDead = true;
     }
     public void ReStart()
