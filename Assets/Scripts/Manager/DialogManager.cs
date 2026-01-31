@@ -48,7 +48,7 @@ public class DialogManager : Singleton<DialogManager>
         {
             if (!_curDialogs.TryGetValue(currentId.Value, out var data)) break;
 
-            if (_registry.TryGetValue(data.Target, out DialogController curController))
+            if (_registry.TryGetValue(data.Target, out var curController))
             {
                 if (lastController != null && lastController != curController)
                 {

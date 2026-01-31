@@ -25,7 +25,7 @@ public class PlayerController2D : MonoBehaviour
     private int currentJumpCount;
     public bool isGrounded;
     private bool isJumping;
-
+    public bool CanMove { get; set; } = true;
     public Animator animator;
     float LocalScaleX;
     void Awake()
@@ -109,6 +109,8 @@ public class PlayerController2D : MonoBehaviour
     
     void Move()
     {
+        if (!CanMove) return;
+        
         float targetSpeed = moveInput * moveSpeed;
         float speedDiff = targetSpeed - rb.velocity.x;
         

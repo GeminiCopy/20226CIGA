@@ -1,0 +1,209 @@
+[
+  {
+    "ID": 1,
+    "Target": "Blank",
+    "Content": "好神奇……",
+    "Time": 1,
+    "NextId": 2
+  },
+  {
+    "ID": 2,
+    "Target": "Blank",
+    "Content": "刚才的一切，就像做梦一样。",
+    "Time": 1.5,
+    "NextId": 3
+  },
+  {
+    "ID": 3,
+    "Target": "Blank",
+    "Content": "最后一颗泪光，进入了身体。",
+    "Time": 1.5,
+    "NextId": 4
+  },
+  {
+    "ID": 4,
+    "Target": "Blank",
+    "Content": "全身……充满了力量。",
+    "Time": 1.5,
+    "NextId": 5
+  },
+  {
+    "ID": 5,
+    "Target": "Blank",
+    "Content": "噩梦……该结束了吧？",
+    "Time": 1.5
+  },
+  {
+    "ID": 6,
+    "Target": "realia",
+    "Content": "som！",
+    "Time": 2,
+    "NextId": 7
+  },
+  {
+    "ID": 7,
+    "Target": "realia",
+    "Content": "魔王就在前面！",
+    "Time": 1.5,
+    "NextId": 8
+  },
+  {
+    "ID": 8,
+    "Target": "realia",
+    "Content": "丛林之中，就是噩梦的核心！",
+    "Time": 1.5,
+    "NextId": 9
+  },
+  {
+    "ID": 9,
+    "Target": "realia",
+    "Content": "女神啊，请将勇气赐予som！",
+    "Time": 1.5,
+    "NextId": 10
+  },
+  {
+    "ID": 10,
+    "Target": "realia",
+    "Content": "使他跨越虚妄，震碎诅咒的源头！",
+    "Time": 1.5,
+    "NextId": 11
+  },
+  {
+    "ID": 11,
+    "Target": "realia",
+    "Content": "跳下去！som！去打败他吧！",
+    "Time": 1.5,
+    "NextId": 12
+  },
+  {
+    "ID": 12,
+    "Target": "som",
+    "Content": "我……真的能做到吗？",
+    "Time": 2,
+    "NextId": 13
+  },
+  {
+    "ID": 13,
+    "Target": "realia",
+    "Content": "当然！",
+    "Time": 1,
+    "NextId": 14
+  },
+  {
+    "ID": 14,
+    "Target": "realia",
+    "Content": "现在的你——强大、怜悯、勇敢。",
+    "Time": 2,
+    "NextId": 15
+  },
+  {
+    "ID": 15,
+    "Target": "realia",
+    "Content": "这才是真正的你！",
+    "Time": 2,
+    "NextId": 16
+  },
+  {
+    "ID": 16,
+    "Target": "som",
+    "Content": "这就是真正的我……",
+    "Time": 2,
+    "NextId": 17
+  },
+  {
+    "ID": 17,
+    "Target": "som",
+    "Content": "不再怯懦和逃避的我……",
+    "Time": 2,
+    "NextId": 18
+  },
+  {
+    "ID": 18,
+    "Target": "som",
+    "Content": "是啊。",
+    "Time": 1,
+    "NextId": 19
+  },
+  {
+    "ID": 19,
+    "Target": "som",
+    "Content": "现在的我，无所畏惧。",
+    "Time": 2,
+    "NextId": 20
+  },
+  {
+    "ID": 20,
+    "Target": "som",
+    "Content": "魔王！你囚禁我的噩梦——",
+    "Time": 2,
+    "NextId": 21
+  },
+  {
+    "ID": 21,
+    "Target": "som",
+    "Content": "就由我亲自终结！",
+    "Time": 2,
+    "NextId": 22
+  },
+  {
+    "ID": 22,
+    "Target": "realia",
+    "Content": "去吧——！",
+    "Time": 1
+  },
+  {
+    "ID": 23,
+    "Target": "Blank",
+    "Content": "砰——！",
+    "Time": 1,
+    "NextId": 24
+  },
+  {
+    "ID": 24,
+    "Target": "Blank",
+    "Content": "……",
+    "Time": 1,
+    "NextId": 25
+  },
+  {
+    "ID": 25,
+    "Target": "Blank",
+    "Content": "……什么声音？",
+    "Time": 1.5,
+    "NextId": 26
+  },
+  {
+    "ID": 26,
+    "Target": "Blank",
+    "Content": "刚才好像有东西从天上掉下来了。",
+    "Time": 2,
+    "NextId": 27
+  },
+  {
+    "ID": 27,
+    "Target": "Blank",
+    "Content": "楼上又有人扔书包了？",
+    "Time": 2,
+    "NextId": 28
+  },
+  {
+    "ID": 28,
+    "Target": "Blank",
+    "Content": "不对，窗户！窗户外面！",
+    "Time": 2,
+    "NextId": 29
+  },
+  {
+    "ID": 29,
+    "Target": "Blank",
+    "Content": "啊——！血……有好多血！",
+    "Time": 2,
+    "NextId": 30
+  },
+  {
+    "ID": 30,
+    "Target": "Blank",
+    "Content": "叫老师……快叫老师！",
+    "Time": 2
+  }
+]

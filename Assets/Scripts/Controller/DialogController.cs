@@ -5,30 +5,19 @@ using UnityEngine;
 public class DialogController : MonoBehaviour
 {
     [Header("UI Components")]
-    public Canvas canvas;          // 用于控制显示/隐藏
     public TMP_Text tmp;    // 文本组件
     
     private bool _isTyping;
     private bool _skipTyping;
-    private UniTaskCompletionSource _clickSignal;
 
     private void Awake()
     {
-        if (canvas != null) canvas.enabled = false;
-    }
-
-    // 简单的 LookAt 相机逻辑，防止气泡侧对着屏幕看不清
-    private void LateUpdate()
-    {
-        if (canvas.enabled && Camera.main != null)
-        {
-            transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-        }
+        tmp.gameObject.SetActive(false);
     }
 
     public async UniTask ShowDialogAsync(Dialog dialog)
     {
-        if (canvas != null) canvas.enabled = true;
+        tmp.gameObject.SetActive(true);
         tmp.text = "";
         
         _isTyping = true;
@@ -51,6 +40,6 @@ public class DialogController : MonoBehaviour
 
     public void Close()
     {
-        if (canvas != null) canvas.enabled = false;
+        tmp.gameObject.SetActive(false);
     }
 }

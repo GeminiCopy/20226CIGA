@@ -8,7 +8,6 @@ public enum EventSet
     QuitGame,
     StartGame,
     NextStage,
-    
 }
 [RequireComponent(typeof(BoxCollider2D))]
 public class ColliderTrigger : MonoBehaviour
@@ -16,22 +15,21 @@ public class ColliderTrigger : MonoBehaviour
     public EventSet eventSet;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag=="Player")
+        if(collision.CompareTag("Player"))
         {
-            //´¥·¢Åö×²ÊÂ¼ş
             switch(eventSet)
             {
                 case EventSet.QuitGame:
                     Application.Quit();
                     break;
+                case EventSet.NextStage:
                 case EventSet.StartGame:
-                    SceneMgr.Instance.LoadScene("Stage1");
+                    //SceneMgr.Instance.LoadScene("Stage1");
+                    //ç”¨è¿™ä¸ªä½¿å¾—å…³å¡æ­£å¸¸åˆ‡æ¢
+                    TypeEventSystem.Inst.Invoke<CompleteCurrentStageEvent>();
                     break;
                 case EventSet.None:
                     break;
-                    
-
-                    
             }
         }
     }
