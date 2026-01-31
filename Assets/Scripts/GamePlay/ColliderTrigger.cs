@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public enum EventSet
 {
     None,
@@ -9,6 +10,7 @@ public enum EventSet
     NextStage,
     
 }
+[RequireComponent(typeof(BoxCollider2D))]
 public class ColliderTrigger : MonoBehaviour
 {
     public EventSet eventSet;

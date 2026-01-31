@@ -27,7 +27,7 @@ public class PlayerController2D : MonoBehaviour
     private bool isJumping;
 
     public Animator animator;
-    
+    float LocalScaleX;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +35,7 @@ public class PlayerController2D : MonoBehaviour
         boxCollider = GetComponent<CapsuleCollider2D>();
         rb.gravityScale = 2f;
         animator= GetComponent<Animator>();
+        LocalScaleX = transform.localScale.x;
     }
     
     void Update()
@@ -56,10 +57,12 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetKey(leftKey))
         {
             moveInput = -1f;
+            transform.localScale = new Vector3(-LocalScaleX, transform.localScale.y, transform.localScale.z);
         }
         if (Input.GetKey(rightKey))
         {
             moveInput = 1f;
+            transform.localScale = new Vector3(LocalScaleX, transform.localScale.y, transform.localScale.z);
         }
         
         if (Input.GetKeyDown(jumpKey))
@@ -126,6 +129,15 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
+        //修改动画
+        if (rb.velocity != Vector2.zero)
+        {
+            animator.SetBool("IsWalk", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -150,14 +162,6 @@ public class PlayerController2D : MonoBehaviour
     public void SetMoveSpeed(float speed)
     {
         moveSpeed = speed;
-        if(moveSpeed!=0f) 
-        {
-            animator.SetBool("IsWalk",true);
-        }
-        else
-        {
-            animator.SetBool("IsWalk",false);
-        }
     }
     
     /// <summary>

@@ -17,7 +17,7 @@ public class PlayerManager : SingletonMono<PlayerManager>
     
     [Header("调试设置")]
     public bool showDebugInfo = true;
-    
+    public bool isStart;//但这个开启时，没有框也不会禁用玩家//用于开始游戏
     private HashSet<TriggerDetector> detectedTriggers = new HashSet<TriggerDetector>();
     private int previousDetectorCount = -1;
     
