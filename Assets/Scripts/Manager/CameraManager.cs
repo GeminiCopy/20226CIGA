@@ -325,13 +325,7 @@ public class CameraManager : SingletonMono<CameraManager>
                 detectedByTriggerCameras.Add(correspondingCamera);
                 Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 被TriggerDetector检测到");
                 
-                // 检查是否有摄像机正在被拖动且对应这个TriggerDetector
-                if (currentDraggingCamera == correspondingCamera)
-                {
-                    // 停止当前拖动
-                    //EndDrag();
-                    Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 正在被拖动，检测到玩家后停止拖动");
-                }
+                // 注意：这里已经移除了“检测到玩家则停止拖动”的逻辑
             }
             else
             {
@@ -662,24 +656,8 @@ public class CameraManager : SingletonMono<CameraManager>
             }
         }
         
-        // 检查当前摄像机是否被TriggerDetector检测
-        if (IsCameraDetectedByTrigger(camera))
-        {
-            Debug.Log($"摄像机 {camera.cameraLabel} 被TriggerDetector检测到，尝试切换到其他可拖动摄像机");
-            
-            // 尝试找到其他可拖动的摄像机
-            SubCameraController alternativeCamera = FindAlternativeDraggableCamera(camera);
-            if (alternativeCamera != null)
-            {
-                Debug.Log($"自动切换到可拖动摄像机: {alternativeCamera.cameraLabel}");
-                camera = alternativeCamera;
-            }
-            else
-            {
-                Debug.Log("没有找到可替代的摄像机，禁止拖拽");
-                return;
-            }
-        }
+        // [修复] 移除了对 IsCameraDetectedByTrigger 的检查
+        // 现在无论玩家是否在摄像机内，都可以开始拖拽
         
         currentlyDraggingCamera = camera;
         
@@ -752,25 +730,6 @@ public class CameraManager : SingletonMono<CameraManager>
                 currentlyDraggingCamera = null;
             }
         }
-    }
-    
-    /// <summary>
-    /// 查找替代的可拖动摄像机
-    /// </summary>
-    private SubCameraController FindAlternativeDraggableCamera(SubCameraController excludedCamera)
-    {
-        // 按索引顺序查找，排除当前摄像机和被检测的摄像机
-        for (int i = 0; i < subCameras.Count; i++)
-        {
-            var camera = subCameras[i];
-            if (camera != excludedCamera && !IsCameraDetectedByTrigger(camera))
-            {
-                return camera;
-            }
-        }
-        
-        // 如果没找到，返回null
-        return null;
     }
     
     public void OnSubCameraDragEnd(SubCameraController camera)
@@ -962,24 +921,11 @@ public class CameraManager : SingletonMono<CameraManager>
                 SubCameraController camera = hit.collider.transform.parent.GetComponent<SubCameraController>();
                 if (camera != null)
                 {
-                    Debug.Log(i + "找到了");
-                    // 检查TriggerDetector状态
-                    if (!IsCameraDetectedByTrigger(camera))
-                    {
-                        // 找到第一个可拖拽的摄像机
-                        Debug.Log($"射线检测: 找到可拖拽摄像机 {camera.cameraLabel}");
-                        StartDragging(camera);
-                        return true;
-                    }
-                    else
-                    {
-                        // 被TriggerDetector检测，跳过
-                        Debug.Log($"射线检测: 跳过被检测的摄像机 {camera.cameraLabel}");
-                    }
-                }
-                else
-                {
-                    Debug.Log(i + "没有找到");
+                    // [修复] 移除 IsCameraDetectedByTrigger 的检查
+                    // 只要射线检测到摄像机框，就直接允许拖动
+                    Debug.Log($"射线检测: 找到可拖拽摄像机 {camera.cameraLabel}");
+                    StartDragging(camera);
+                    return true;
                 }
             }
         }
