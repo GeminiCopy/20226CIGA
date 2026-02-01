@@ -16,7 +16,7 @@ public class KillPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 9)
+        if(collision.CompareTag("Player"))
         {
             OnKillPlayer();
             Debug.Log("dead");

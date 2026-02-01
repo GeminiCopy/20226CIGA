@@ -16,8 +16,10 @@ public class ColliderTrigger : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("tri");
         if(collision.CompareTag("Player"))
         {
+            Debug.Log("suc");
             switch(eventSet)
             {
                 case EventSet.QuitGame:
@@ -33,6 +35,7 @@ public class ColliderTrigger : MonoBehaviour
                         // 通过索引获取场景路径，然后提取场景名
                         string scenePath = SceneUtility.GetScenePathByBuildIndex(nextIndex);
                         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                        Debug.Log($"{sceneName} + path{scenePath}");
                         SceneMgr.Instance.LoadScene(sceneName);
                         GameManager.Instance.ReStart();
                     }
