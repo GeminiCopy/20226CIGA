@@ -67,7 +67,7 @@ public class Stage4 : MonoBehaviour
     {
         bp.OnFadeInComplete += () =>
         {
-            DialogManager.Inst.Play(onComplete: () =>
+            DialogManager.Inst.Play(23,onComplete: () =>
             {
                 SceneMgr.Instance.LoadSceneAsyn("StartScene");
                 UIMgr.Instance.HidePanel<BlankPanel>();
