@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialog: {fileID: 7503866678943071709}
+  fadePanel: {fileID: 0}
+  fadeTime: 1
 --- !u!1 &5093668769978139407
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82b4617913549a5be353d39146a7b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1415780216934608868}
   tmp: {fileID: 363673367538864284}
 --- !u!223 &1415780216934608868
 Canvas:
