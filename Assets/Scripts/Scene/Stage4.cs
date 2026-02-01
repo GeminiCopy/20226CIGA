@@ -69,8 +69,8 @@ public class Stage4 : MonoBehaviour
         {
             DialogManager.Inst.Play(onComplete: () =>
             {
-                SceneMgr.Instance.LoadSceneAsyn("StartScene",
-                    (() => { UIMgr.Instance.HidePanel<BlankPanel>(); }));
+                SceneMgr.Instance.LoadSceneAsyn("StartScene");
+                UIMgr.Instance.HidePanel<BlankPanel>();
             });
         };
     }
