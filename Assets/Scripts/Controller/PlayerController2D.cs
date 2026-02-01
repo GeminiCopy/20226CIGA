@@ -180,7 +180,7 @@ public class PlayerController2D : MonoBehaviour
                 if (contact.normal.y > 0.5f)
                 {
                     isJumping = false;
-                    animator.SetBool("IsJump", true);
+                    animator.SetBool("IsJump", false);
                     break;
                 }
             }

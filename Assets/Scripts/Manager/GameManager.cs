@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager: SingletonMono<GameManager>
 {
     
-    string EndResourcePath = "Prefebs/UI/GameOverPanel";//结束面板的路径
+    string EndResourcePath = "UI/Prefabs/GameOverPanel";//结束面板的路径
     //角色路径
     string DeathMusicPath = "Music/player_dead";
     public AudioClip deathSound;
