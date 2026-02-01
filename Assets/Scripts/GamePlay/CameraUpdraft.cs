@@ -46,8 +46,11 @@ public class CameraUpdraft : MonoBehaviour
         if (targetCameraDetector != null && targetCameraDetector.IsPlayerDetected)
         {
             // 3. 如果检测到，给两个玩家都施加向上的力（保持同步）
-            ApplyUpdraft(rb2); // 里世界玩家
-            ApplyUpdraft(rb1); // 表世界玩家
+            if (rb1.position.x is < -7 and > -14)
+            {
+                ApplyUpdraft(rb2); // 里世界玩家
+                ApplyUpdraft(rb1); // 表世界玩家
+            }
         }
         else
         {
