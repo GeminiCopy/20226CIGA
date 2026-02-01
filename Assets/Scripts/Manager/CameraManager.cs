@@ -329,7 +329,7 @@ public class CameraManager : SingletonMono<CameraManager>
                 if (currentDraggingCamera == correspondingCamera)
                 {
                     // 停止当前拖动
-                    EndDrag();
+                    //EndDrag();
                     Debug.Log($"CameraManager: 摄像机 {correspondingCamera.cameraLabel} 正在被拖动，检测到玩家后停止拖动");
                 }
             }

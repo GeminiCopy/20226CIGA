@@ -7,7 +7,8 @@ public class TriggerDetector : MonoBehaviour
     [SerializeField] private bool playerDetected;
     
     // 公共属性，暴露playerDetected状态
-    public bool IsPlayerDetected { get { return playerDetected; } }
+    public bool IsPlayerDetected => playerDetected;
+
     //public event System.Action<Collider2D> OnObjectDetected;
     private HashSet<Collider2D> storedColliders = new HashSet<Collider2D>();
     //public IEnumerable<Collider2D> StoredColliders => storedColliders;
