@@ -14,11 +14,15 @@ public class Stage1 : MonoBehaviour
     private void OnStage1Start(BlankPanel arg0)
     {
         DialogManager.Inst.Load("tbstg1dialog");
-        DialogManager.Inst.Play(onComplete:(() =>
+        DialogManager.Inst.Play(onComplete:() =>
         {
             UIMgr.Instance.HidePanel<BlankPanel>();
-            DialogManager.Inst.Play(3);
-        }));
+            DialogManager.Inst.Play(3, onComplete: () =>
+            {
+                PlayerManager.Instance.player1.CanMove = true;
+                PlayerManager.Instance.player2.CanMove = true;
+            });
+        });
     }
     private void OnStage1FinalDialog()
     {
