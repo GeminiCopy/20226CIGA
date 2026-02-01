@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Stage1 : MonoBehaviour
 {
+    public string path = "";
     private void Start()
     {
+        MusicMgr.Instance.PlayerBKMusic(path);
         UIMgr.Instance.ShowPanel<BlankPanel>(callback:OnStage1Start);
         PlayerManager.Instance.player1.CanMove = false;
         PlayerManager.Instance.player2.CanMove = false;

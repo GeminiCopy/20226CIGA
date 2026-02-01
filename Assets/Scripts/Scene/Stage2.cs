@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Stage2 : MonoBehaviour
 {
+    public string path = "";
     private void Start()
     {
-        UIMgr.Instance.ShowPanel<BlankPanel>(callback: OnStage1Start);
-        PlayerManager.Instance.player1=GameObject.Find("PlayerIn").GetComponent<PlayerController2D>();
-        PlayerManager.Instance.player2 = GameObject.Find("PlayerOut").GetComponent<PlayerController2D>();
+        OnStage1Start();
     }
-    private void OnStage1Start(BlankPanel arg0)
+    private void OnStage1Start()
     {
 
         CameraManager.Instance.Clear();
