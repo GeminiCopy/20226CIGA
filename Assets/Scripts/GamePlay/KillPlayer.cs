@@ -33,8 +33,18 @@ public class KillPlayer : MonoBehaviour
             case DeathWay.Falling:
                 break;
         }
+        GameManager.Instance.OnDie();
+        StartCoroutine(DeathSequence());
+        
+    }
+    IEnumerator DeathSequence()
+    {
+        Debug.Log("玩家死亡");
+
+        // 等待3秒
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         CameraManager.Instance.Clear();
-        //GameManager.Instance.OnDie();
+        Debug.Log("3秒后执行复活逻辑");
     }
 }

@@ -40,7 +40,7 @@ public class GameManager : SingletonMono<GameManager>
         UIMgr.Instance.ShowPanel<BlankPanel>();
 
         PlayerOut = transform.Find("PlayerOut").gameObject;
-        SetRespawnPoint();
+        //SetRespawnPoint();
 
 
     }
