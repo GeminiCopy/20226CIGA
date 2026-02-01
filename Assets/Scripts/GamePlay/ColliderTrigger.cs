@@ -13,6 +13,7 @@ public enum EventSet
 public class ColliderTrigger : MonoBehaviour
 {
     public EventSet eventSet;
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))

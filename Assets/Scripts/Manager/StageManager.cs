@@ -5,6 +5,11 @@ public class StageManager : MonoBehaviour
     public int currentStage;
     private void Awake()
     {
+        if (GameObject.Find("StageManager"))
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
         TypeEventSystem.Inst.Register<CompleteCurrentStageEvent>(OnCompleteStage);
     }
 

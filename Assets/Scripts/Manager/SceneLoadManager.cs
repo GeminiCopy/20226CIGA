@@ -7,6 +7,11 @@ public class SceneLoadManager : MonoBehaviour
 {
     private void Awake()
     {
+        if (GameObject.Find("SceneLoadManager"))
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
         TypeEventSystem.Inst.Register<LoadSceneEvent>(OnLoadScene);
     }
     private void OnLoadScene(LoadSceneEvent obj)
