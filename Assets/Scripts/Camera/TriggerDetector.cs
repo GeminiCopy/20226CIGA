@@ -8,12 +8,13 @@ public class TriggerDetector : MonoBehaviour
     
     // 公共属性，暴露playerDetected状态
     public bool IsPlayerDetected { get { return playerDetected; } }
-    
+    //public event System.Action<Collider2D> OnObjectDetected;
     private HashSet<Collider2D> storedColliders = new HashSet<Collider2D>();
-
+    //public IEnumerable<Collider2D> StoredColliders => storedColliders;
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("ENTER:" + other.name);
+        //OnObjectDetected?.Invoke(other);
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Debug.Log("玩家进入");

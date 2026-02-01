@@ -1,50 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BlankPanel : BasePanel
 {
-    public float fadeTime = 1f;
+    public float fadeTime = .5f;
     public Image panelBg;
-
-    void Start()
+    public event Action OnFadeInComplete;
+    public DialogController myBubble;
+    protected override void Awake()
     {
-        // 获取黑色背景
-        panelBg = GetComponentInChildren<Image>();
-
-        // 启动时淡出
-        StartCoroutine(FadeOut());
+        base.Awake();
+        DialogManager.Inst.Register("Blank",myBubble);
     }
-
+    private void OnDestroy()
+    {
+        if (DialogManager.Inst != null)
+        {
+            DialogManager.Inst.UnRegister("Blank");
+        }
+    }
     public override void ShowMe()
     {
-        StartCoroutine(FadeOut());
+        FadeIn().ContinueWith((() =>
+        {
+            OnFadeInComplete?.Invoke();
+            OnFadeInComplete = null;
+        })).Forget();
     }
 
     public override void HideMe()
     {
-        StartCoroutine(FadeIn());
+        FadeOut().Forget();
     }
-
-
-    IEnumerator FadeOut()
+    
+    public async UniTask FadeOut()
     {
-        // 从黑变透明
         float timer = 0;
-        Color color = panelBg.color;
+        Color color = panelBg.color; 
 
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
             color.a = 1 - (timer / fadeTime);
             panelBg.color = color;
-            yield return null;
+
+            await UniTask.Yield(PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy());
         }
+
+        color.a = 0;
+        panelBg.color = color;
     }
 
-    IEnumerator FadeIn()
+    public async UniTask FadeIn()
     {
-        // 从透明变黑
         float timer = 0;
         Color color = panelBg.color;
 
@@ -53,7 +64,11 @@ public class BlankPanel : BasePanel
             timer += Time.deltaTime;
             color.a = timer / fadeTime;
             panelBg.color = color;
-            yield return null;
+
+            await UniTask.Yield(PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy());
         }
+
+        color.a = 1;
+        panelBg.color = color;
     }
 }

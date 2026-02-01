@@ -6,13 +6,13 @@ public class GameOverPanel : BasePanel
 {
     public override void HideMe()
     {
-        Debug.Log("¹Ø±Õ½áÊøÃæ°å");
+        Debug.Log("ï¿½Ø±Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         gameObject.SetActive(false);
     }
 
     public override void ShowMe()
     {
-        Debug.Log("¿ªÆô½áÊøÃæ°å");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         gameObject.SetActive(true);
     }
 

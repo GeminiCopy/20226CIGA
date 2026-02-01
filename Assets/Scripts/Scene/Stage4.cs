@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage4 : MonoBehaviour
@@ -19,15 +16,19 @@ public class Stage4 : MonoBehaviour
     private void OnStage4Start(BlankPanel bp)
     {
         DialogManager.Inst.Load("tbstg4dialog");
-        DialogManager.Inst.Play(onComplete:(() =>
+        bp.OnFadeInComplete += () =>
         {
-            UIMgr.Instance.HidePanel<BlankPanel>();
-            DialogManager.Inst.Play(6,(() =>
+            DialogManager.Inst.Play(onComplete: () =>
             {
-                PlayerManager.Instance.player1.CanMove = true;
-                PlayerManager.Instance.player2.CanMove = true;
-            }));
-        }));
+                UIMgr.Instance.HidePanel<BlankPanel>();
+                DialogManager.Inst.Play(6,
+                    (() =>
+                    {
+                        PlayerManager.Instance.player1.CanMove = true;
+                        PlayerManager.Instance.player2.CanMove = true;
+                    }));
+            });
+        };
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -60,9 +61,21 @@ public class Stage4 : MonoBehaviour
             }
         }
     }
-    private void OnStage4End(BlankPanel arg0)
+    private void OnStage4End(BlankPanel bp)
     {
-        UIMgr.Instance.ShowPanel<StaffPanel>();
-        UIMgr.Instance.HidePanel<BlankPanel>();
+        bp.OnFadeInComplete += () =>
+        {
+            DialogManager.Inst.Play(onComplete: () =>
+            {
+                TypeEventSystem.Inst.Invoke(new LoadSceneEvent
+                {
+                    sceneName = "StartScene",
+                    onCompleted = (() =>
+                    {
+                        UIMgr.Instance.HidePanel<BlankPanel>();
+                    })
+                });
+            });
+        };
     }
 }

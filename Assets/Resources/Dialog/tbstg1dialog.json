@@ -22,9 +22,8 @@
   {
     "ID": 4,
     "Target": "realia",
-    "Content": "它可以擦去虚伪,照亮真实，拖动试试看，它能让你看到我",
-    "Time": 3.5,
-    "NextId": 5
+    "Content": "它可以擦去虚伪,照亮真实，拖动试试看，它能让你看到我。",
+    "Time": 3.5
   },
   {
     "ID": 5,
@@ -99,21 +98,28 @@
   {
     "ID": 15,
     "Target": "realia",
-    "Content": "听着，我没法逗留太久，魔王感知得到我。",
+    "Content": "听着，我没法逗留太久，魔王能够感知到我。",
     "Time": 2.5,
     "NextId": 16
   },
   {
     "ID": 16,
     "Target": "realia",
-    "Content": "你要跟随泪光走，它会指引你通往真实的世界。",
+    "Content": "后面的路我不能直接和说话，你只要记住……",
     "Time": 2.5,
     "NextId": 17
   },
   {
     "ID": 17,
     "Target": "realia",
-    "Content": "一定要快，魔王随时可能发现你！",
+    "Content": "一定要跟随泪光走，它会指引你通往真实的世界。",
+    "Time": 2.5,
+    "NextId": 18
+  },
+  {
+    "ID": 18,
+    "Target": "realia",
+    "Content": "动作要快，魔王随时可能发现你！",
     "Time": 2
   }
 ]

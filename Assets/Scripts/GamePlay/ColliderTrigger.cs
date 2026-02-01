@@ -36,8 +36,6 @@ public class ColliderTrigger : MonoBehaviour
                         SceneMgr.Instance.LoadScene(sceneName);
                         GameManager.Instance.ReStart();
                     }
-                 
-
                     break;
                 case EventSet.None:
                     break;

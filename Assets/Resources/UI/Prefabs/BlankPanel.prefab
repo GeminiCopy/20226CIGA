@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71d2eae30534cd9b0b2e2935685095f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialog: {fileID: 7503866678943071709}
-  fadePanel: {fileID: 0}
-  fadeTime: 1
+  fadeTime: 0.5
+  panelBg: {fileID: 8749426221856140098}
+  myBubble: {fileID: 7503866678943071709}
 --- !u!1 &5093668769978139407
 GameObject:
   m_ObjectHideFlags: 0
