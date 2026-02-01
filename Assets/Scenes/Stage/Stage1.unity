@@ -401,7 +401,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 865982201}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5966876232146310403, guid: 90f2e459a43e1ea4f955999db5aadebd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -938,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 8488487328437487203, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
       propertyPath: RespawnPoint
       value: 
-      objectReference: {fileID: 1568328677}
+      objectReference: {fileID: 0}
     - target: {fileID: 8822865167810319412, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -981,17 +981,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8822865167810319412, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 37851468}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
---- !u!4 &865982201 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8822865167810319412, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
-  m_PrefabInstance: {fileID: 865982200}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1102570830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,6 +1897,7 @@ MonoBehaviour:
   jumpCountWhenNotDetected: 0
   showDebugInfo: 0
   isStart: 0
+  isUnDead: 0
 --- !u!4 &1443693605
 Transform:
   m_ObjectHideFlags: 0
@@ -2329,11 +2322,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521504173}
   m_CullTransparentMesh: 1
---- !u!1 &1568328677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2378095099902386436, guid: ff8981d282f8b8d44ac3a237c745f5e4, type: 3}
-  m_PrefabInstance: {fileID: 865982200}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1617144511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,3 +3499,4 @@ SceneRoots:
   - {fileID: 2000676610382321916}
   - {fileID: 865982200}
   - {fileID: 1952256844}
+  - {fileID: 37851467}

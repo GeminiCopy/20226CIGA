@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class KillPlayer : MonoBehaviour
 {
     public DeathWay deathWay = DeathWay.None;
+    public bool isIgnore;
     public enum DeathWay
     {
         None,
@@ -23,6 +24,10 @@ public class KillPlayer : MonoBehaviour
     }
     public void OnKillPlayer()
     {
+        if ( PlayerManager.Instance.isUnDead )
+        {
+            return;
+        }
         switch(deathWay)
         {
             case DeathWay.None:
@@ -33,9 +38,10 @@ public class KillPlayer : MonoBehaviour
             case DeathWay.Falling:
                 break;
         }
-        GameManager.Instance.OnDie();
-        StartCoroutine(DeathSequence());
+        //StartCoroutine(DeathSequence());
         
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CameraManager.Instance.ArrangeAllSubCameras();
     }
     IEnumerator DeathSequence()
     {
@@ -43,8 +49,7 @@ public class KillPlayer : MonoBehaviour
 
         // 等待3秒
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        CameraManager.Instance.Clear();
+        
         Debug.Log("3秒后执行复活逻辑");
     }
 }
