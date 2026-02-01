@@ -17,11 +17,9 @@ public class Stage1 : MonoBehaviour
         DialogManager.Inst.Play(onComplete:() =>
         {
             UIMgr.Instance.HidePanel<BlankPanel>();
-            DialogManager.Inst.Play(3, onComplete: () =>
-            {
-                PlayerManager.Instance.player1.CanMove = true;
-                PlayerManager.Instance.player2.CanMove = true;
-            });
+            PlayerManager.Instance.player1.CanMove = true;
+            PlayerManager.Instance.player2.CanMove = true;
+            DialogManager.Inst.Play(3);
         });
     }
     private void OnStage1FinalDialog()
