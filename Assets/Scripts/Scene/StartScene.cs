@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class StartScene : MonoBehaviour
 {
-    private string path = "Music/2";
+    
     private void Start()
     {
-        MusicMgr.Instance.PlayerBKMusic(path);
+        MusicMgr.Instance.StopBKMusic();
+        MusicMgr.Instance.PlayerBKMusic("Music/ggj_1 - SadStart");
     }
     public void AddCamera()
     {

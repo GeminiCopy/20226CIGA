@@ -8,6 +8,8 @@ public class Stage4 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MusicMgr.Instance.StopBKMusic();
+        MusicMgr.Instance.PlayerBKMusic("ggj_1 - Wiredhappiness");
         CameraManager.Instance.Clear();
         UIMgr.Instance.ShowPanel<BlankPanel>(callback: OnStage4Start);
         PlayerManager.Instance.player1.CanMove = false;

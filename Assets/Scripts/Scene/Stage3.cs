@@ -6,6 +6,8 @@ public class Stage3 : MonoBehaviour
     private bool moreCamera;
     private void Start()
     {
+        MusicMgr.Instance.StopBKMusic();
+        MusicMgr.Instance.PlayerBKMusic("ggj_1 - Brighter");
         CameraManager.Instance.Clear();
         CameraManager.Instance.AddNewSubCamera();
         moreCamera = false;

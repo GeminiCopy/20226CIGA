@@ -10,6 +10,8 @@ public class Stage2 : MonoBehaviour
     }
     private void OnStage1Start()
     {
+        MusicMgr.Instance.StopBKMusic();
+        MusicMgr.Instance.PlayerBKMusic("Music/ggj_1 - Mid");
         CameraManager.Instance.Clear();
         CameraManager.Instance.AddNewSubCamera();
         //GameObject.Find("BlankPanel").GetComponent<BasePanel>().HideMe();
