@@ -15,6 +15,10 @@ public class BlankPanel : BasePanel
         base.Awake();
         DialogManager.Inst.Register("Blank",myBubble);
     }
+    private void Start()
+    {
+        HideMe();
+    }
     private void OnDestroy()
     {
         if (DialogManager.Inst != null)
