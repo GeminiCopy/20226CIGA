@@ -37,7 +37,6 @@ public class GameManager : SingletonMono<GameManager>
         RestartCount = 2f;//重新开始时间
         RestartCounter = RestartCount;
 
-        UIMgr.Instance.ShowPanel<BlankPanel>();
 
         PlayerOut = transform.Find("PlayerOut").gameObject;
         //SetRespawnPoint();

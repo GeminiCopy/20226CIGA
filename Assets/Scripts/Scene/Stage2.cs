@@ -6,7 +6,6 @@ public class Stage2 : MonoBehaviour
 {
     private void Start()
     {
-
         UIMgr.Instance.ShowPanel<BlankPanel>(callback: OnStage1Start);
         PlayerManager.Instance.player1=GameObject.Find("PlayerIn").GetComponent<PlayerController2D>();
         PlayerManager.Instance.player2 = GameObject.Find("PlayerOut").GetComponent<PlayerController2D>();
@@ -18,5 +17,6 @@ public class Stage2 : MonoBehaviour
         CameraManager.Instance.AddNewSubCamera();
         CameraManager.Instance.AddNewSubCamera();
         GameObject.Find("BlankPanel").GetComponent<BasePanel>().HideMe();
+        UIMgr.Instance.HidePanel<BlankPanel>();
     }
 }
