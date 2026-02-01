@@ -150,7 +150,8 @@ public class CameraManager : SingletonMono<CameraManager>
     {
         inputEnabled = enabled;
     }
-    
+
+#if UNITY_EDITOR
     void HandleGlobalInput()
     {
         if (!inputEnabled) return;
@@ -176,6 +177,7 @@ public class CameraManager : SingletonMono<CameraManager>
             // 根据当前布局规则重新排列所有子摄像机
             ToggleLayout();
         }
+#endif
     }
     
     #region 动态管理方法
@@ -301,14 +303,15 @@ public class CameraManager : SingletonMono<CameraManager>
         // 找到对应的SubCameraController
         SubCameraController correspondingCamera = null;
         
-        foreach (var camera in subCameras)
+        foreach (var controller in subCameras)
         {
-            TriggerDetector[] detectors = camera.GetComponentsInChildren<TriggerDetector>();
+            
+            var detectors = controller.GetComponentsInChildren<TriggerDetector>();
             foreach (var det in detectors)
             {
                 if (det == detector)
                 {
-                    correspondingCamera = camera;
+                    correspondingCamera = controller;
                     break;
                 }
             }

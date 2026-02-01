@@ -8,10 +8,10 @@ public class Stage4 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIMgr.Instance.ShowPanel<BlankPanel>(callback:OnStage4Start);
+        CameraManager.Instance.Clear();
+        UIMgr.Instance.ShowPanel<BlankPanel>(callback: OnStage4Start);
         PlayerManager.Instance.player1.CanMove = false;
         PlayerManager.Instance.player2.CanMove = false;
-        
     }
     private void OnStage4Start(BlankPanel bp)
     {
@@ -33,6 +33,7 @@ public class Stage4 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("tri");
+
         if (other.CompareTag("Player"))
         {
             Debug.Log("suc");
@@ -48,6 +49,7 @@ public class Stage4 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("tri");
+
             if (other.transform.position.y > -8)
             {
                 outerScene.SetActive(false);
@@ -57,7 +59,7 @@ public class Stage4 : MonoBehaviour
             }
             else
             {
-                UIMgr.Instance.ShowPanel<BlankPanel>(callback:OnStage4End);
+                UIMgr.Instance.ShowPanel<BlankPanel>(callback: OnStage4End);
             }
         }
     }
@@ -67,14 +69,8 @@ public class Stage4 : MonoBehaviour
         {
             DialogManager.Inst.Play(onComplete: () =>
             {
-                TypeEventSystem.Inst.Invoke(new LoadSceneEvent
-                {
-                    sceneName = "StartScene",
-                    onCompleted = (() =>
-                    {
-                        UIMgr.Instance.HidePanel<BlankPanel>();
-                    })
-                });
+                SceneMgr.Instance.LoadSceneAsyn("StartScene",
+                    (() => { UIMgr.Instance.HidePanel<BlankPanel>(); }));
             });
         };
     }

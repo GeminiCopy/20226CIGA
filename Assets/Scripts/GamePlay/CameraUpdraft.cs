@@ -19,6 +19,8 @@ public class CameraUpdraft : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(PlayerManager.Instance.player1.name);
+        Debug.Log(PlayerManager.Instance.player2.name);
         // 1. 从 PlayerManager 单例中获取两个玩家的引用
         if (PlayerManager.Instance != null)
         {

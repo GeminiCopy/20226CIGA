@@ -61,7 +61,7 @@ public class GameManager : SingletonMono<GameManager>
         }
 
         //UIMgr.Instance.HidePanel<GameOverPanel>();
-        
+        CameraManager.Instance.ClearAllSubCameras();
     }
     
 }

@@ -1,11 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerManager : SingletonMono<PlayerManager>
 {
-    [Header("玩家控制器引用")]
-    public PlayerController2D player1;
-    public PlayerController2D player2;
+    public PlayerController2D player1
+    {
+        get
+        {
+            var allControllers = FindObjectsOfType<PlayerController2D>(true);
+            return allControllers.FirstOrDefault(x => x.name == "PlayerOut");
+        }
+    }
+    public PlayerController2D player2
+    {
+        get
+        {
+            var allControllers = FindObjectsOfType<PlayerController2D>(true);
+            return allControllers.FirstOrDefault(x => x.name == "PlayerIn");
+        }
+    }
     
     [Header("速度设置")]
     public float speedWhenDetected = 5f;    // 检测到玩家时的速度（速度a）
@@ -25,12 +39,6 @@ public class PlayerManager : SingletonMono<PlayerManager>
     protected override void Awake()
     {
         base.Awake();
-        
-        // 验证玩家控制器引用
-        if (player1 == null || player2 == null)
-        {
-            Debug.LogError("PlayerManager: 两个玩家控制器引用都不能为空！");
-        }
         
         // 查找场景中所有的TriggerDetector
         FindAllTriggerDetectors();

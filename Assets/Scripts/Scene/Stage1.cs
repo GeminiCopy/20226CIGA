@@ -21,6 +21,7 @@ public class Stage1 : MonoBehaviour
             UIMgr.Instance.HidePanel<BlankPanel>();
             PlayerManager.Instance.player1.CanMove = true;
             PlayerManager.Instance.player2.CanMove = true;
+            CameraManager.Instance.Clear();
             CameraManager.Instance.AddNewSubCamera();
             DialogManager.Inst.Play(3);
         });
