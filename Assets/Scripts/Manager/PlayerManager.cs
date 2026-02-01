@@ -35,7 +35,7 @@ public class PlayerManager : SingletonMono<PlayerManager>
     private HashSet<TriggerDetector> detectedTriggers = new HashSet<TriggerDetector>();
     private int previousDetectorCount = -1;
     private bool previousColliderLayerState = false; // 跟踪excludeLayers状态
-    public bool isUnDead;
+    public int isUnDead;
     protected override void Awake()
     {
         base.Awake();

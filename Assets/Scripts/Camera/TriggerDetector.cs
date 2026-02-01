@@ -19,7 +19,7 @@ public class TriggerDetector : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Debug.Log("玩家进入");
-            PlayerManager.Instance.isUnDead = true;
+            PlayerManager.Instance.isUnDead++;
             SetPlayerDetected(true);
             ActivateAllStoredColliders();
         }
@@ -31,7 +31,7 @@ public class TriggerDetector : MonoBehaviour
             storedColliders.Add(other);
         }
         
-        if (playerDetected == false)
+        if (!playerDetected)
         {
             return;
         }
@@ -48,7 +48,7 @@ public class TriggerDetector : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Debug.Log("玩家离开");
-            PlayerManager.Instance.isUnDead = false;
+            PlayerManager.Instance.isUnDead--;
             SetPlayerDetected(false);
             DeactivateAllStoredColliders();
             return;

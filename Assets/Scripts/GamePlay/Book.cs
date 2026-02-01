@@ -19,7 +19,7 @@ public class Book : MonoBehaviour
     }
     private void OnKillPlayer()
     {
-        if ( PlayerManager.Instance.isUnDead )
+        if ( PlayerManager.Instance.isUnDead > 0 )
         {
             return;
         }
