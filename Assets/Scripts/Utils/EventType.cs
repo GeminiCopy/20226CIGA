@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 public struct LoadSceneEvent
 {
     public string sceneName;
@@ -7,4 +8,5 @@ public struct LoadSceneEvent
 }
 public struct CompleteCurrentStageEvent
 {
+    
 }
