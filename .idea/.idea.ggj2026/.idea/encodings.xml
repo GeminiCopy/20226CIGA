@@ -2,10 +2,12 @@
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/Scripts/FrameWork/ResourcesMgr.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Manager/GameManager.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Manager/PoolMgr.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Manager/ResourcesMgr.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Manager/SceneMgr.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Manager/UIMgr.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/BasePanel.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Utils/EventCenter.cs" charset="GB2312" />
   </component>
 </project>

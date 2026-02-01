@@ -65,8 +65,7 @@
     "ID": 10,
     "Target": "realia",
     "Content": "使他跨越虚妄，震碎诅咒的源头！",
-    "Time": 1.5,
-    "NextId": 11
+    "Time": 1.5
   },
   {
     "ID": 11,
@@ -161,49 +160,28 @@
   {
     "ID": 24,
     "Target": "Blank",
-    "Content": "……",
+    "Content": "……什么声音？",
     "Time": 1,
     "NextId": 25
   },
   {
     "ID": 25,
     "Target": "Blank",
-    "Content": "……什么声音？",
+    "Content": "刚才好像有东西从天上掉下来了？",
     "Time": 1.5,
     "NextId": 26
   },
   {
     "ID": 26,
     "Target": "Blank",
-    "Content": "刚才好像有东西从天上掉下来了。",
+    "Content": "啊——！血、有好多血！",
     "Time": 2,
     "NextId": 27
   },
   {
     "ID": 27,
     "Target": "Blank",
-    "Content": "楼上又有人扔书包了？",
-    "Time": 2,
-    "NextId": 28
-  },
-  {
-    "ID": 28,
-    "Target": "Blank",
-    "Content": "不对，窗户！窗户外面！",
-    "Time": 2,
-    "NextId": 29
-  },
-  {
-    "ID": 29,
-    "Target": "Blank",
-    "Content": "啊——！血……有好多血！",
-    "Time": 2,
-    "NextId": 30
-  },
-  {
-    "ID": 30,
-    "Target": "Blank",
-    "Content": "叫老师……快叫老师！",
+    "Content": "叫老师、快叫老师！有人跳楼了！！！",
     "Time": 2
   }
 ]

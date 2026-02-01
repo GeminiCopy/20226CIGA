@@ -62,10 +62,7 @@ public class Stage4 : MonoBehaviour
     }
     private void OnStage4End(BlankPanel arg0)
     {
-        DialogManager.Inst.Play(startFrom:23,onComplete:() =>
-        {
-            UIMgr.Instance.HidePanel<BlankPanel>();
-            UIMgr.Instance.ShowPanel<StaffPanel>();
-        });
+        UIMgr.Instance.ShowPanel<StaffPanel>();
+        UIMgr.Instance.HidePanel<BlankPanel>();
     }
 }
