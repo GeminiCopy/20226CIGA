@@ -10,7 +10,6 @@ public class GameManager : SingletonMono<GameManager>
     public AudioClip deathSound;
     GameObject GameOverPanelPrefab;//结束面板prefeb
     GameObject GameOverPanelPrefabInstance;//实例化的面板
-    GameObject PlayerOut;
     public GameObject RespawnPoint = null;//玩家重生时传送的位置,先用vector3占着，你们想修改成obj或者其他的都行
 
     public float RestartCounter, RestartCount;
@@ -37,11 +36,6 @@ public class GameManager : SingletonMono<GameManager>
         RestartCount = 2f;//重新开始时间
         RestartCounter = RestartCount;
 
-
-        PlayerOut = transform.Find("PlayerOut").gameObject;
-        //SetRespawnPoint();
-
-
     }
     //角色死亡时调用
     public void OnDie()
@@ -66,7 +60,7 @@ public class GameManager : SingletonMono<GameManager>
             Debug.Log("重生错误");
         }
 
-        UIMgr.Instance.HidePanel<GameOverPanel>();
+        //UIMgr.Instance.HidePanel<GameOverPanel>();
         
     }
     
