@@ -39,7 +39,7 @@ public class KillPlayer : MonoBehaviour
                 break;
         }
         //StartCoroutine(DeathSequence());
-        
+        MusicMgr.Instance.PlaySound("Music/paper_fall");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         CameraManager.Instance.ArrangeAllSubCameras();
     }

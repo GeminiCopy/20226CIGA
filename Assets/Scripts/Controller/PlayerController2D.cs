@@ -133,6 +133,7 @@ public class PlayerController2D : MonoBehaviour
             currentJumpCount--;
             isJumping = true;
             animator.SetBool("IsJump", true);
+            MusicMgr.Instance.PlaySound("Music/player_Jump");
         }
     }
     
